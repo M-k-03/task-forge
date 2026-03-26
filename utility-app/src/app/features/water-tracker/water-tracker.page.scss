@@ -1,0 +1,137 @@
+:host {
+  --card-radius: 16px;
+  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Stats Grid ─── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  margin: 0;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  border: none;
+  text-align: center;
+
+  ion-card-content {
+    padding: 16px 12px;
+  }
+}
+
+.stat-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+
+  ion-icon {
+    font-size: 1.4rem;
+    color: #fff;
+  }
+
+  &.blue {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+  }
+
+  &.green {
+    background: linear-gradient(135deg, #11998e, #38ef7d);
+  }
+}
+
+.stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--ion-color-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+/* ─── Usage Section (Toggle + List) ─── */
+.usage-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  padding: 0 4px;
+  margin-bottom: 12px;
+
+  ion-icon {
+    font-size: 1.2rem;
+    color: var(--ion-color-primary);
+  }
+}
+
+/* ─── Add Card ─── */
+.add-card {
+  margin: 0 0 20px 0;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  border: none;
+}
+
+.form-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+
+  ion-icon {
+    font-size: 1.3rem;
+    color: var(--ion-color-primary);
+  }
+}
+
+.input-item {
+  --background: var(--ion-color-light);
+  --border-radius: 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  ion-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+}
+
+.custom-input {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  font-size: 1rem;
+}
+
+.add-button {
+  margin-top: 16px;
+  --border-radius: 12px;
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-weight: 600;
+  font-size: 0.95rem;
+  height: 48px;
+}
+
+.button-cost {
+  opacity: 0.85;
+  font-weight: 400;
+}

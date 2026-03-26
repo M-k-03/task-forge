@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="home-toolbar">
+    <ion-title class="home-title">
+      <ion-icon name="apps"></ion-icon>
+      Utility App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="welcome-section">
+    <h1 class="greeting">Hello there! 👋</h1>
+    <p class="subtitle">What would you like to do today?</p>
+  </div>
+
+  <div class="menu-grid">
+    <ion-card
+      *ngFor="let item of menuItems"
+      [routerLink]="item.route"
+      class="feature-card"
+      button
+    >
+      <ion-card-content>
+        <div
+          class="card-icon-wrapper"
+          [style.background]="'linear-gradient(135deg, ' + item.color + ', ' + item.color + '99)'"
+        >
+          <ion-icon [name]="item.icon"></ion-icon>
+        </div>
+        <h2 class="card-title">{{ item.title }}</h2>
+        <p class="card-description">{{ item.description }}</p>
+        <div class="card-arrow">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="app-version">
+    <p>Utility App v1.0.0</p>
+  </div>
+</ion-content>

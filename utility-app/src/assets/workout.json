@@ -1,0 +1,64 @@
+{
+  "workout_plan": [
+    {
+      "day": "Monday",
+      "focus": "Push (Chest/Shoulders/Triceps)",
+      "exercises": [
+        { "id": "mon_1", "name": "Bench Press", "sets": 3, "reps": "8-10", "icon": "barbell-outline" },
+        { "id": "mon_2", "name": "Overhead Press", "sets": 3, "reps": "10-12", "icon": "fitness-outline" },
+        { "id": "mon_3", "name": "Triceps Pushdown", "sets": 3, "reps": "12-15", "icon": "trending-down-outline" },
+        { "id": "mon_4", "name": "Lateral Raises", "sets": 3, "reps": "15", "icon": "expand-outline" }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "focus": "Pull (Back/Biceps)",
+      "exercises": [
+        { "id": "tue_1", "name": "Deadlift", "sets": 3, "reps": "5", "icon": "barbell-outline" },
+        { "id": "tue_2", "name": "Pullups", "sets": 3, "reps": "AMRAP", "icon": "body-outline" },
+        { "id": "tue_3", "name": "Barbell Rows", "sets": 3, "reps": "8-10", "icon": "barbell-outline" },
+        { "id": "tue_4", "name": "Bicep Curls", "sets": 3, "reps": "12", "icon": "fitness-outline" }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "focus": "Legs",
+      "exercises": [
+        { "id": "wed_1", "name": "Back Squat", "sets": 4, "reps": "8-10", "icon": "barbell-outline" },
+        { "id": "wed_2", "name": "Leg Press", "sets": 3, "reps": "12-15", "icon": "arrow-down-outline" },
+        { "id": "wed_3", "name": "Leg Curls", "sets": 3, "reps": "12", "icon": "trending-down-outline" },
+        { "id": "wed_4", "name": "Calf Raises", "sets": 4, "reps": "20", "icon": "footsteps-outline" }
+      ]
+    },
+    {
+      "day": "Thursday",
+      "focus": "Push (Variation)",
+      "exercises": [
+        { "id": "thu_1", "name": "Incline Press", "sets": 3, "reps": "10-12", "icon": "barbell-outline" },
+        { "id": "thu_2", "name": "Dips", "sets": 3, "reps": "AMRAP", "icon": "body-outline" },
+        { "id": "thu_3", "name": "Arnold Press", "sets": 3, "reps": "12", "icon": "fitness-outline" },
+        { "id": "thu_4", "name": "Skullcrushers", "sets": 3, "reps": "12", "icon": "trending-down-outline" }
+      ]
+    },
+    {
+      "day": "Friday",
+      "focus": "Pull (Variation)",
+      "exercises": [
+        { "id": "fri_1", "name": "Lat Pulldowns", "sets": 3, "reps": "10-12", "icon": "trending-down-outline" },
+        { "id": "fri_2", "name": "Seated Rows", "sets": 3, "reps": "12", "icon": "barbell-outline" },
+        { "id": "fri_3", "name": "Hammer Curls", "sets": 3, "reps": "12", "icon": "fitness-outline" },
+        { "id": "fri_4", "name": "Face Pulls", "sets": 3, "reps": "15", "icon": "infinite-outline" }
+      ]
+    },
+    {
+      "day": "Saturday",
+      "focus": "Legs (Variation)",
+      "exercises": [
+        { "id": "sat_1", "name": "Romanian Deadlift", "sets": 3, "reps": "10-12", "icon": "barbell-outline" },
+        { "id": "sat_2", "name": "Lunges", "sets": 3, "reps": "10/leg", "icon": "footsteps-outline" },
+        { "id": "sat_3", "name": "Leg Extension", "sets": 3, "reps": "15", "icon": "trending-up-outline" },
+        { "id": "sat_4", "name": "Plank", "sets": 3, "reps": "60s", "icon": "stopwatch-outline" }
+      ]
+    }
+  ]
+}
