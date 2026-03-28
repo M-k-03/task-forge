@@ -24,6 +24,12 @@ import {
   IonCardContent,
   IonFab,
   IonFabButton,
+  IonModal,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
   ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -42,7 +48,11 @@ import {
   checkmarkCircleOutline,
   saveOutline,
   calendarOutline,
-  refreshOutline
+  refreshOutline,
+  addOutline,
+  closeOutline,
+  trashOutline,
+  bicycleOutline
 } from 'ionicons/icons';
 import { GymTrackerService } from './services/gym-tracker.service';
 import { WorkoutDay, Exercise } from './models/gym.model';
@@ -75,7 +85,13 @@ import { Observable, take } from 'rxjs';
     IonCardSubtitle,
     IonCardContent,
     IonFab,
-    IonFabButton
+    IonFabButton,
+    IonModal,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonSelect,
+    IonSelectOption
   ],
   templateUrl: './gym-tracker.page.html',
   styleUrls: ['./gym-tracker.page.scss'],
@@ -89,6 +105,15 @@ export class GymTrackerPage implements OnInit {
   currentWorkout = signal<WorkoutDay | undefined>(undefined);
   
   progress = signal<number>(0);
+
+  // Custom Exercise Form
+  isModalOpen = false;
+  newExercise = {
+    name: '',
+    sets: 3,
+    reps: '10',
+    icon: 'barbell-outline'
+  };
 
   constructor() {
     addIcons({
@@ -106,7 +131,11 @@ export class GymTrackerPage implements OnInit {
       'checkmark-circle-outline': checkmarkCircleOutline,
       'save-outline': saveOutline,
       'calendar-outline': calendarOutline,
-      'refresh-outline': refreshOutline
+      'refresh-outline': refreshOutline,
+      'add-outline': addOutline,
+      'close-outline': closeOutline,
+      'trash-outline': trashOutline,
+      'bicycle-outline': bicycleOutline
     });
   }
 
@@ -170,22 +199,60 @@ export class GymTrackerPage implements OnInit {
     const workout = this.currentWorkout();
     if (!workout) return;
 
+    // 1. Sync the current custom Plan to Cloud (Exercises data)
+    await this.service.syncManualPlan();
+
+    // 2. Record the history entry
     const completedExerciseIds = workout.exercises
       .filter(ex => ex.completedSets?.every(s => s))
       .map(ex => ex.id);
 
     this.service.recordWorkout(workout.day, completedExerciseIds);
     
-    const toast = await this.toastCtrl.create({
-      message: 'Workout progress saved!',
-      duration: 2000,
-      color: 'success',
-      position: 'bottom'
-    });
-    await toast.present();
+    this.showToast('Workout & Exercises saved successfully!', 'success');
   }
 
   resetWorkout() {
     this.updateCurrentWorkout(this.selectedDay());
+  }
+
+  // --- Custom Plan Methods ---
+
+  openAddModal() {
+    this.isModalOpen = true;
+  }
+
+  async addExerciseToPlan() {
+    if (!this.newExercise.name.trim()) return;
+
+    await this.service.addExercise(this.selectedDay(), {
+      name: this.newExercise.name,
+      sets: Number(this.newExercise.sets),
+      reps: this.newExercise.reps,
+      icon: this.newExercise.icon
+    });
+
+    this.isModalOpen = false;
+    this.newExercise = { name: '', sets: 3, reps: '10', icon: 'barbell-outline' };
+    
+    // Refresh
+    this.updateCurrentWorkout(this.selectedDay());
+    this.showToast('Exercise added successfully!', 'success');
+  }
+
+  async removeExercise(id: string) {
+    await this.service.removeExercise(id);
+    this.updateCurrentWorkout(this.selectedDay());
+    this.showToast('Exercise removed.', 'warning');
+  }
+
+  private async showToast(message: string, color: string = 'primary') {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'bottom'
+    });
+    await toast.present();
   }
 }

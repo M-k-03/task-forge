@@ -81,10 +81,19 @@ export class FirestoreService {
    * Removes undefined properties from an object for Firestore compatibility.
    */
   private cleanObject(obj: any): any {
+    if (obj === null || typeof obj !== 'object') {
+      return obj;
+    }
+
+    if (Array.isArray(obj)) {
+      return obj.map(item => this.cleanObject(item));
+    }
+
     const clean: any = {};
     Object.keys(obj).forEach(key => {
-      if (obj[key] !== undefined) {
-        clean[key] = obj[key];
+      const val = obj[key];
+      if (val !== undefined) {
+        clean[key] = this.cleanObject(val);
       }
     });
     return clean;

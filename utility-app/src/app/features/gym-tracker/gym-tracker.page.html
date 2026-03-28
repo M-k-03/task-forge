@@ -41,9 +41,12 @@
 
   <div class="empty-state" *ngIf="!currentWorkout()?.exercises?.length">
     <ion-icon name="calendar-outline"></ion-icon>
-    <h3>Rest Day! 😴</h3>
-    <p>Enjoy your recovery. See you tomorrow!</p>
-    <ion-button fill="clear" (click)="selectedDay.set('Monday')">Check Next Week</ion-button>
+    <h3>No exercises found 😴</h3>
+    <p>Enjoy your recovery or add exercises below.</p>
+    <ion-button fill="clear" (click)="openAddModal()">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Create Workout
+    </ion-button>
   </div>
 
   <ion-grid *ngIf="currentWorkout()?.exercises?.length">
@@ -59,7 +62,12 @@
                   <ion-card-subtitle>{{ exercise.reps }} reps</ion-card-subtitle>
                 </div>
               </div>
-              <ion-badge color="light">{{ exercise.sets }} Sets</ion-badge>
+              <div class="header-tools">
+                <ion-badge color="light">{{ exercise.sets }} Sets</ion-badge>
+                <ion-button fill="clear" color="danger" (click)="removeExercise(exercise.id)">
+                  <ion-icon slot="icon-only" name="trash-outline" size="small"></ion-icon>
+                </ion-button>
+              </div>
             </div>
           </ion-card-header>
           
@@ -80,11 +88,64 @@
     </ion-row>
   </ion-grid>
 
-  <div style="height: 100px;"></div>
+  <div class="fab-padding"></div>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="saveWorkout()" color="success" [disabled]="progress() === 0">
+  <!-- Multi-FAB or Single FAB for Add/Save -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="gym-fab">
+    <ion-fab-button (click)="openAddModal()" color="primary" class="add-fab">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    
+    <ion-fab-button (click)="saveWorkout()" color="success" [disabled]="progress() === 0" class="save-fab">
       <ion-icon name="save-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <!-- Add Exercise Modal -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Add Exercise</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="isModalOpen = false">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div class="form-container">
+          <ion-item lines="none" class="input-item">
+            <ion-label position="stacked">Name</ion-label>
+            <ion-input [(ngModel)]="newExercise.name" placeholder="e.g. Bench Press"></ion-input>
+          </ion-item>
+          
+          <ion-item lines="none" class="input-item">
+            <ion-label position="stacked">Sets</ion-label>
+            <ion-input type="number" [(ngModel)]="newExercise.sets" placeholder="3"></ion-input>
+          </ion-item>
+          
+          <ion-item lines="none" class="input-item">
+            <ion-label position="stacked">Reps</ion-label>
+            <ion-input [(ngModel)]="newExercise.reps" placeholder="10-12"></ion-input>
+          </ion-item>
+          
+          <ion-item lines="none" class="input-item">
+            <ion-label position="stacked">Icon</ion-label>
+            <ion-select [(ngModel)]="newExercise.icon" placeholder="Select Icon">
+              <ion-select-option value="barbell-outline">Barbell</ion-select-option>
+              <ion-select-option value="fitness-outline">Dumbbell</ion-select-option>
+              <ion-select-option value="body-outline">Bodyweight</ion-select-option>
+              <ion-select-option value="bicycle-outline">Cardio</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-button expand="block" (click)="addExerciseToPlan()" class="confirm-button">
+            Add to {{ selectedDay() }}
+          </ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

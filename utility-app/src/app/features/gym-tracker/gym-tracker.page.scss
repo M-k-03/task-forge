@@ -141,6 +141,63 @@
   }
 }
 
-ion-fab-button {
-  --box-shadow: 0 8px 24px rgba(72, 187, 120, 0.4);
+.fab-padding {
+  height: 160px; /* More room for Android navigation buttons */
+  width: 100%;
+}
+
+.gym-fab {
+  bottom: calc(var(--ion-safe-area-bottom, 0px) + 32px);
+  right: calc(var(--ion-safe-area-right, 0px) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  z-index: 1000;
+
+  ion-fab-button {
+    --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    margin-bottom: 8px;
+  }
+}
+
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+}
+
+.input-item {
+  --background: #f7fafc;
+  --border-radius: 12px;
+  margin-bottom: 8px;
+  
+  ion-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-bottom: 6px;
+  }
+}
+
+.confirm-button {
+  margin-top: 24px;
+  height: 52px;
+  --border-radius: 12px;
+  --background: #764ba2 !important; /* Explicit purple */
+  --color: #ffffff !important;      /* Explicit white */
+  color: #ffffff !important;
+  font-weight: 700;
+  --box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+  
+  &:active {
+    --background: #5a3a7e !important;
+  }
 }
