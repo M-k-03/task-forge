@@ -1,67 +1,95 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, map, tap, of } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { StorageService } from '../../../core/services/storage.service';
 import { STORAGE_KEYS } from '../../../core/constants/app.constants';
-import { WorkoutPlan, GymSession, DayPlan } from '../models/gym.model';
+import { WorkoutDay, GymEntry, Exercise } from '../models/gym.model';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class GymTrackerService {
   private http = inject(HttpClient);
   private storage = inject(StorageService);
 
-  private planSubject = new BehaviorSubject<WorkoutPlan | null>(null);
-  plan$ = this.planSubject.asObservable();
+  private _workoutPlan = new BehaviorSubject<WorkoutDay[]>([]);
+  public workoutPlan$ = this._workoutPlan.asObservable();
+
+  private _history = new BehaviorSubject<GymEntry[]>([]);
+  public history$ = this._history.asObservable();
 
   constructor() {
-    this.loadPlan();
+    this.loadWorkoutPlan();
+    this.loadHistory();
   }
 
   /**
-   * Load the workout plan from the static JSON file.
+   * Loads the static workout plan from assets.
    */
-  loadPlan(): void {
-    this.http.get<WorkoutPlan>('/assets/workout.json').subscribe({
-      next: (plan) => this.planSubject.next(plan),
-      error: (err) => console.error('[GymService] Failed to load plan', err),
+  private loadWorkoutPlan() {
+    this.http.get<{ workout_plan: WorkoutDay[] }>('assets/workout.json').subscribe({
+      next: (data) => {
+        // Initialize completedSets array for each exercise
+        const plan = data.workout_plan.map(day => ({
+          ...day,
+          exercises: day.exercises.map(ex => ({
+            ...ex,
+            completedSets: new Array(ex.sets).fill(false)
+          }))
+        }));
+        this._workoutPlan.next(plan);
+      },
+      error: (err) => console.error('Error loading workout plan:', err)
     });
   }
 
   /**
-   * Retrieve session data for a specific date (YYYY-MM-DD).
+   * Loads workout history from storage.
    */
-  getSession(date: string): GymSession | null {
-    const allSessions = this.getAllSessions();
-    return allSessions.find((s) => s.date === date) || null;
+  private loadHistory() {
+    const history = this.storage.get<GymEntry[]>(STORAGE_KEYS.GYM_ENTRIES) || [];
+    this._history.next(history);
   }
 
   /**
-   * Toggle a set's completion for a specific exercise in a session.
+   * Saves history to storage.
    */
-  saveProgress(date: string, day: string, exerciseId: string, setIndex: number, completed: boolean): void {
-    const allSessions = this.getAllSessions();
-    let session = allSessions.find((s: GymSession) => s.date === date);
-
-    if (!session) {
-      session = { date, day, exerciseProgress: {} };
-      allSessions.push(session);
-    }
-
-    if (!session.exerciseProgress[exerciseId]) {
-      session.exerciseProgress[exerciseId] = [];
-    }
-
-    session.exerciseProgress[exerciseId][setIndex] = completed;
-
-    // Limit stored sessions to last 30 entries to prevent bloat
-    const limitedSessions = allSessions.slice(-30);
-    this.storage.set<GymSession[]>(STORAGE_KEYS.GYM_ENTRIES, limitedSessions);
+  private saveHistory(history: GymEntry[]) {
+    this.storage.set(STORAGE_KEYS.GYM_ENTRIES, history);
+    this._history.next(history);
   }
 
   /**
-   * Get all workout sessions from storage.
+   * Records a workout session.
    */
-  private getAllSessions(): GymSession[] {
-    return this.storage.get<GymSession[]>(STORAGE_KEYS.GYM_ENTRIES) || [];
+  recordWorkout(day: string, completedExercises: string[], notes?: string) {
+    const entry: GymEntry = {
+      id: crypto.randomUUID(),
+      date: new Date().toISOString(),
+      workoutDay: day,
+      completedExercises,
+      notes
+    };
+
+    const currentHistory = this._history.value;
+    this.saveHistory([entry, ...currentHistory].slice(0, 50)); // Keep last 50
+  }
+
+  /**
+   * Get workout for a specific day.
+   */
+  getWorkoutForDay(dayName: string): Observable<WorkoutDay | undefined> {
+    return this.workoutPlan$.pipe(
+      map(plan => plan.find(d => d.day.toLowerCase() === dayName.toLowerCase()))
+    );
+  }
+
+  /**
+   * Get today's recommended workout based on current day of the week.
+   */
+  getTodaysWorkout(): Observable<WorkoutDay | undefined> {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const today = days[new Date().getDay()];
+    return this.getWorkoutForDay(today);
   }
 }

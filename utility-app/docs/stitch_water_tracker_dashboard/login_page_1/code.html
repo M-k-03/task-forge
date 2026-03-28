@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | TASK FORGE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#c1c7d2",
+                        "secondary-fixed": "#ffdbcf",
+                        "surface-dim": "#d8dadb",
+                        "surface-container-low": "#f2f4f5",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#191c1d",
+                        "on-secondary-container": "#611b00",
+                        "surface-variant": "#e1e3e4",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#390c00",
+                        "surface-container-high": "#e6e8e9",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#eceeef",
+                        "on-background": "#191c1d",
+                        "surface-container-highest": "#e1e3e4",
+                        "background": "#f8fafb",
+                        "primary-fixed-dim": "#9fcaff",
+                        "outline": "#717782",
+                        "tertiary-fixed-dim": "#88d982",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#a3f69c",
+                        "primary-container": "#0061a4",
+                        "on-tertiary-container": "#99ec93",
+                        "tertiary-container": "#1c6d24",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f8fafb",
+                        "secondary": "#ab3600",
+                        "on-tertiary-fixed": "#002204",
+                        "on-primary-fixed-variant": "#00497d",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "primary": "#00497d",
+                        "secondary-container": "#ff6f39",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#005312",
+                        "on-primary-container": "#c0dbff",
+                        "on-primary-fixed": "#001d36",
+                        "inverse-primary": "#9fcaff",
+                        "surface-tint": "#0061a4",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f8fafb",
+                        "primary-fixed": "#d1e4ff",
+                        "error-container": "#ffdad6",
+                        "inverse-surface": "#2e3132",
+                        "inverse-on-surface": "#eff1f2",
+                        "on-surface-variant": "#414750",
+                        "on-secondary-fixed-variant": "#822700"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #00497d 0%, #0061a4 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-background min-h-screen selection:bg-primary-fixed selection:text-on-primary-fixed">
+<main class="flex min-h-screen flex-col md:flex-row">
+<!-- Branding Section (Asymmetric Editorial Style) -->
+<section class="hidden md:flex w-1/2 kinetic-gradient relative p-16 flex-col justify-between items-start overflow-hidden">
+<div class="relative z-10">
+<h1 class="font-headline font-black text-4xl tracking-tighter text-on-primary-container">TASK FORGE</h1>
+<div class="mt-24">
+<h2 class="font-headline font-extrabold text-7xl text-white leading-tight tracking-tight max-w-md">
+                        Your data is a <span class="italic font-normal opacity-80">story</span> in motion.
+                    </h2>
+<p class="mt-8 font-body text-xl text-primary-fixed-dim max-w-sm leading-relaxed">
+                        Track your evolution through precise metrics and high-performance editorial journaling.
+                    </p>
+</div>
+</div>
+<div class="relative z-10 flex gap-4">
+<div class="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="water_drop">water_drop</span>
+</div>
+<div class="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="fitness_center">fitness_center</span>
+</div>
+<div class="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="edit_note">edit_note</span>
+</div>
+</div>
+<!-- Background Texture Decor -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+<div class="absolute right-10 top-1/4 w-64 h-64 bg-secondary-container/10 rounded-full blur-2xl"></div>
+</section>
+<!-- Login Form Section -->
+<section class="flex-1 flex flex-col justify-center items-center px-6 py-12 md:px-24 bg-surface">
+<div class="w-full max-w-md">
+<!-- Mobile Branding -->
+<div class="md:hidden mb-12">
+<h1 class="font-headline font-black text-2xl tracking-tighter text-primary">TASK FORGE</h1>
+</div>
+<div class="mb-10">
+<h3 class="font-headline font-bold text-3xl text-on-surface">Welcome back</h3>
+<p class="text-on-surface-variant font-medium mt-2">Log in to continue your kinetic journey.</p>
+</div>
+<form class="space-y-6">
+<!-- Outlined Email Input -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold font-label text-on-surface-variant ml-1 uppercase tracking-wider" for="email">Email Address</label>
+<div class="relative group">
+<input class="w-full px-5 py-4 bg-surface-container-low border-0 rounded-xl text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all" id="email" placeholder="e.g. runner@kinetic.com" type="email"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary" data-icon="alternate_email">alternate_email</span>
+</div>
+</div>
+<!-- Outlined Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-end ml-1">
+<label class="block text-sm font-semibold font-label text-on-surface-variant uppercase tracking-wider" for="password">Password</label>
+<a class="text-xs font-bold text-primary hover:text-primary-container transition-colors" href="#">Forgot Password?</a>
+</div>
+<div class="relative group">
+<input class="w-full px-5 py-4 bg-surface-container-low border-0 rounded-xl text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary-container transition-all" id="password" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary" data-icon="lock_open">lock_open</span>
+</div>
+</div>
+<!-- Sign In Button -->
+<button class="w-full py-5 kinetic-gradient text-white font-headline font-bold text-lg rounded-xl shadow-[0px_12px_32px_rgba(0,73,125,0.15)] hover:scale-[1.02] active:scale-95 transition-all" type="submit">
+                        Sign In
+                    </button>
+</form>
+<div class="relative my-10 flex items-center justify-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+<span class="absolute bg-surface px-4 text-xs font-bold text-outline uppercase tracking-[0.2em]">Or continue with</span>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 py-4 bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+<img alt="Google Logo" class="w-5 h-5" data-alt="Google colorful letter G logo icon on transparent background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1dSnJlIM7HnnG0ufLPrLqzXFEmcNkKVN6wDt445_UEKRbpjfOjjSQxddCs8om04S82tNwinTgNHdY4svBNbnXZtjgfSagf7uNOpnKvukm-LXHH00lvTSjRQ7MJpzP-Tg7djeWYhTgPlKUgmcvMH2P6vWz3de-pdH-afrn6xMhUI_gS4wIHjKzFl5MPg2niOpljdC89fa1r8Cn7jMA4pv5EeZr3zJ81nVnFAqUqdxsdwgN5qO3R_TNmwz9zYXs7yo44l8uGJZxOuQ"/>
+<span class="font-bold text-sm text-on-surface">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 py-4 bg-surface-container-lowest border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-on-surface text-xl" data-icon="apple" data-weight="fill">ios</span>
+<span class="font-bold text-sm text-on-surface">Apple</span>
+</button>
+</div>
+<p class="mt-12 text-center text-sm font-medium text-on-surface-variant">
+                    Don't have an account? 
+                    <a class="text-primary font-extrabold hover:underline underline-offset-4" href="#">Join the Collective</a>
+</p>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-auto pt-12">
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest text-center">© 2024 TASK FORGE SYSTEMS. ALL RIGHTS RESERVED.</p>
+</footer>
+</section>
+</main>
+<!-- Background Decoration for Visual Depth -->
+<div class="fixed top-0 right-0 w-[40vw] h-[40vw] bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-[100px] pointer-events-none"></div>
+<div class="fixed bottom-0 left-0 w-[30vw] h-[30vw] bg-secondary/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-[80px] pointer-events-none"></div>
+</body></html>

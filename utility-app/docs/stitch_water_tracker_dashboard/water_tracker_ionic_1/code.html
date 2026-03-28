@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Kinetic Journal | Water Tracker</title>
+<!-- Ionic Framework -->
+<script src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js" type="module"></script>
+<script nomodule="" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0061a4",
+              "on-primary": "#ffffff",
+              "primary-container": "#d1e4ff",
+              "secondary": "#ab3600",
+              "on-secondary": "#ffffff",
+              "surface": "#f8fafb",
+              "on-surface": "#191c1d",
+              "outline": "#717782",
+            },
+            fontFamily: {
+              "headline": ["Lexend", "sans-serif"],
+              "body": ["Manrope", "sans-serif"],
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        :root {
+            --ion-font-family: 'Manrope', sans-serif;
+            --ion-color-primary: #0061a4;
+            --ion-color-primary-rgb: 0, 97, 164;
+            --ion-background-color: #f8fafb;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        ion-header {
+            --background: rgba(248, 250, 251, 0.8);
+        }
+        ion-toolbar {
+            --background: transparent;
+            --border-style: none;
+            --padding-start: 16px;
+            --padding-end: 16px;
+        }
+        ion-card {
+            margin: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border-radius: 24px;
+        }
+        .card-inner-padding {
+            padding: 24px;
+        }
+        ion-tab-bar {
+            --border: none;
+            --background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 24px 24px 0 0;
+            height: 80px;
+        }
+        ion-tab-button {
+            --color-selected: #0061a4;
+        }
+        ion-content::part(background) {
+            background: #f8fafb;
+        }
+        .custom-fab {
+            --background: #ab3600;
+            --color: white;
+            --box-shadow: 0 8px 16px rgba(171, 54, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+<ion-app>
+<ion-header class="ion-no-border">
+<ion-toolbar>
+<ion-buttons slot="start">
+<ion-button color="primary">
+<span class="material-symbols-outlined">menu</span>
+</ion-button>
+</ion-buttons>
+<ion-title class="font-headline font-bold text-xl tracking-tight text-on-surface">Task Forge</ion-title>
+<ion-buttons slot="end">
+<ion-avatar class="w-8 h-8">
+<img alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq-UeIcJzr7MV2ppc6XC2aC_L_jPlis3IpmbzxbXByEH8bBICSOrqhuYXhx_Dh_9maIoJciwRHA_Ocyvlu2QMYHcUvvgwxBmeAyplk6ddnH9eosVfqxfmUlgL_onlfNTmRZKsncdPYIH1NMeFmgGJkSj8ctHQ4jEynFnDAEAyxmySEQgmFiprfd9rem-fpFQ3yMe_yfSoH80RXzv9KxM363PnR1gCTs8K9VOJ3X3M64zHNjfwGwUJFuxEMMt17gWM9zf2UKjwnnPQ"/>
+</ion-avatar>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+<header class="mb-8">
+<h2 class="font-headline text-3xl font-extrabold text-primary mb-1">Hydration Insights</h2>
+<p class="font-body text-outline">Monitoring water consumption and cost.</p>
+</header>
+<div class="grid grid-cols-1 gap-4 mb-8">
+<ion-card class="bg-white">
+<div class="card-inner-padding flex flex-col justify-between h-40">
+<div>
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+<p class="font-body text-[10px] uppercase tracking-widest text-outline mt-2">Total Expenses</p>
+</div>
+<div class="flex items-baseline justify-between">
+<h3 class="font-headline text-3xl font-bold">$1,240.50</h3>
+<span class="text-xs font-bold text-green-600">− 12%</span>
+</div>
+</div>
+</ion-card>
+<ion-card class="bg-primary text-white">
+<div class="card-inner-padding flex flex-col justify-between h-48 relative overflow-hidden">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary-container" data-icon="water_drop" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<p class="font-body text-[10px] uppercase tracking-widest text-primary-container/80 mt-2">Weekly Consumption</p>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline text-3xl font-bold">142 Liters</h3>
+<div class="w-full bg-white/20 h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-white h-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="absolute -right-6 -bottom-6 opacity-10">
+<span class="material-symbols-outlined text-[10rem]" data-icon="opacity">opacity</span>
+</div>
+</div>
+</ion-card>
+<ion-card class="bg-slate-100">
+<div class="card-inner-padding flex flex-col justify-between h-40">
+<div>
+<span class="material-symbols-outlined text-primary" data-icon="calendar_month">calendar_month</span>
+<p class="font-body text-[10px] uppercase tracking-widest text-outline mt-2">Monthly Consumption</p>
+</div>
+<div>
+<h3 class="font-headline text-3xl font-bold">582 L</h3>
+<p class="text-xs text-outline">Avg 19.4 L / day</p>
+</div>
+</div>
+</ion-card>
+</div>
+<section class="mb-8">
+<div class="flex justify-between items-center mb-4 px-1">
+<h3 class="font-headline font-bold text-lg">Purchase History</h3>
+<ion-button class="font-bold text-xs" fill="clear" size="small">
+                        View All <span class="material-symbols-outlined ml-1 !text-sm">arrow_forward</span>
+</ion-button>
+</div>
+<ion-list class="bg-transparent space-y-3" lines="none">
+<ion-item class="rounded-3xl shadow-sm mb-3" style="--background: white; --padding-start: 12px; --padding-end: 12px;">
+<ion-thumbnail class="bg-primary-container rounded-2xl flex items-center justify-center m-0" slot="start">
+<span class="material-symbols-outlined text-primary" data-icon="local_shipping">local_shipping</span>
+</ion-thumbnail>
+<ion-label>
+<h2 class="font-headline font-bold text-on-surface">Fresh Springs</h2>
+<p class="text-[10px] text-outline">Oct 24 • 100L</p>
+</ion-label>
+<ion-note class="text-primary font-bold text-base" slot="end">$45.00</ion-note>
+</ion-item>
+<ion-item class="rounded-3xl shadow-sm mb-3" style="--background: white; --padding-start: 12px; --padding-end: 12px;">
+<ion-thumbnail class="bg-orange-100 rounded-2xl flex items-center justify-center m-0" slot="start">
+<span class="material-symbols-outlined text-secondary" data-icon="local_shipping">local_shipping</span>
+</ion-thumbnail>
+<ion-label>
+<h2 class="font-headline font-bold text-on-surface">Alpine Pure</h2>
+<p class="text-[10px] text-outline">Oct 18 • 60L</p>
+</ion-label>
+<ion-note class="text-primary font-bold text-base" slot="end">$28.50</ion-note>
+</ion-item>
+</ion-list>
+</section>
+<ion-card class="bg-slate-200 ion-padding mb-8">
+<h3 class="font-headline font-bold text-lg mb-2">Stock Alert</h3>
+<p class="text-sm text-outline mb-4">2 cans remaining. Lasts ~3 days.</p>
+<ion-button class="font-bold h-12 rounded-xl ion-no-margin" color="primary" expand="block">
+                    Order Now
+                </ion-button>
+<div class="mt-6">
+<div class="flex justify-between text-[10px] font-bold uppercase tracking-wider text-outline mb-1">
+<span>Storage</span>
+<span class="text-primary">20%</span>
+</div>
+<ion-progress-bar class="h-2 rounded-full" value="0.2"></ion-progress-bar>
+</div>
+</ion-card>
+<div class="relative rounded-3xl overflow-hidden aspect-video shadow-lg mb-12">
+<img alt="Refreshing water" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbSAsJf72hO4k18upV9zEGrUX-ty12m0zsW3Yzj23v9X3WNgiRrYfLFKKVCQ21Xm8P4hjjwxQicKR3HqjkVkrMUgRNUXWiKLKRhUsZIpuFULWNx8RVbMDBJBxDMaykyDPmYJwVpCRcXos8Cf_2Ooj091CY-h3uBLCsXmSLh1AnxGKB7Yg6DENvdcQF6_6HHEQKRjvEza24WVb7oXCZNc1uNaXbhYAFHiVaoqmFiKGVfZ-4mUOCcdvljbWiSqWNBVGlTE21WNarXkg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex items-end p-6">
+<div>
+<span class="bg-white/20 backdrop-blur-md px-2 py-0.5 rounded-full text-[8px] font-bold text-white uppercase tracking-widest mb-2 inline-block">Daily Tip</span>
+<h4 class="text-white font-headline font-bold text-lg leading-tight">Hydration boosts cognitive focus by 14%.</h4>
+</div>
+</div>
+</div>
+</ion-content>
+<ion-fab class="mb-20" horizontal="end" slot="fixed" vertical="bottom">
+<ion-fab-button class="custom-fab">
+<span class="material-symbols-outlined">add</span>
+</ion-fab-button>
+</ion-fab>
+<ion-tab-bar slot="bottom">
+<ion-tab-button selected="" tab="water">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<ion-label class="text-[10px] font-bold uppercase tracking-tighter mt-1">Water</ion-label>
+</ion-tab-button>
+<ion-tab-button tab="gym">
+<span class="material-symbols-outlined">fitness_center</span>
+<ion-label class="text-[10px] font-bold uppercase tracking-tighter mt-1">Gym</ion-label>
+</ion-tab-button>
+<ion-tab-button tab="profile">
+<span class="material-symbols-outlined">person</span>
+<ion-label class="text-[10px] font-bold uppercase tracking-tighter mt-1">Profile</ion-label>
+</ion-tab-button>
+</ion-tab-bar>
+</ion-app>
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Journal | Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline-variant": "#c1c7d2",
+              "secondary-fixed": "#ffdbcf",
+              "surface-dim": "#d8dadb",
+              "surface-container-low": "#f2f4f5",
+              "secondary-fixed-dim": "#ffb59c",
+              "on-error-container": "#93000a",
+              "on-surface": "#191c1d",
+              "on-secondary-container": "#611b00",
+              "surface-variant": "#e1e3e4",
+              "on-error": "#ffffff",
+              "on-secondary-fixed": "#390c00",
+              "surface-container-high": "#e6e8e9",
+              "on-primary": "#ffffff",
+              "surface-container": "#eceeef",
+              "on-background": "#191c1d",
+              "surface-container-highest": "#e1e3e4",
+              "background": "#f8fafb",
+              "primary-fixed-dim": "#9fcaff",
+              "outline": "#717782",
+              "tertiary-fixed-dim": "#88d982",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#a3f69c",
+              "primary-container": "#0061a4",
+              "on-tertiary-container": "#99ec93",
+              "tertiary-container": "#1c6d24",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#f8fafb",
+              "secondary": "#ab3600",
+              "on-tertiary-fixed": "#002204",
+              "on-primary-fixed-variant": "#00497d",
+              "on-tertiary-fixed-variant": "#005312",
+              "primary": "#00497d",
+              "secondary-container": "#ff6f39",
+              "on-tertiary": "#ffffff",
+              "tertiary": "#005312",
+              "on-primary-container": "#c0dbff",
+              "on-primary-fixed": "#001d36",
+              "inverse-primary": "#9fcaff",
+              "surface-tint": "#0061a4",
+              "error": "#ba1a1a",
+              "surface-bright": "#f8fafb",
+              "primary-fixed": "#d1e4ff",
+              "error-container": "#ffdad6",
+              "inverse-surface": "#2e3132",
+              "inverse-on-surface": "#eff1f2",
+              "on-surface-variant": "#414750",
+              "on-secondary-fixed-variant": "#822700"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #00497d 0%, #0061a4 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-hidden">
+<!-- Main Splash Container -->
+<div class="relative min-h-screen flex flex-col items-center justify-center p-6 bg-surface overflow-hidden">
+<!-- Animated Background Elements (Non-JS purely CSS/Tailwind layout) -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] kinetic-gradient opacity-10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary opacity-5 blur-[100px] rounded-full"></div>
+</div>
+<!-- Hero Branding Area -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<!-- Stylized Dynamic 'K' / Pulse Icon -->
+<div class="mb-12 relative">
+<div class="w-32 h-32 flex items-center justify-center bg-primary rounded-[2.5rem] rotate-12 shadow-2xl overflow-hidden relative group">
+<div class="absolute inset-0 kinetic-gradient"></div>
+<!-- The Pulse Line / Dynamic 'K' -->
+<div class="relative flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-7xl font-light scale-110" data-icon="insights" style="font-variation-settings: 'FILL' 0, 'wght' 200;">insights</span>
+</div>
+</div>
+<!-- Accent Dot -->
+<div class="absolute -bottom-2 -right-2 w-8 h-8 bg-secondary rounded-full border-4 border-surface shadow-lg"></div>
+</div>
+<!-- Brand Name: KINETIC JOURNAL -->
+<h1 class="font-headline font-black text-5xl md:text-7xl text-primary tracking-tighter uppercase leading-[0.8] mb-6">
+                KINETIC<br/>
+<span class="text-on-surface opacity-90">JOURNAL</span>
+</h1>
+<!-- Editorial Tagline -->
+<p class="font-label text-sm md:text-base text-slate-500 uppercase tracking-[0.4em] font-semibold mb-16">
+                Your Day, Optimized.
+            </p>
+<!-- Loading Indicator / Punchy Status -->
+<div class="flex flex-col items-center gap-4">
+<div class="w-12 h-[2px] bg-outline-variant relative overflow-hidden rounded-full">
+<div class="absolute inset-0 bg-primary w-1/2 animate-[loading_2s_ease-in-out_infinite]"></div>
+</div>
+<span class="font-label text-[10px] text-primary/60 font-bold uppercase tracking-widest">
+                    Initializing Core
+                </span>
+</div>
+</div>
+<!-- Bottom Branding Decor -->
+<div class="absolute bottom-12 left-0 w-full flex justify-center px-10">
+<div class="w-full max-w-md h-[1px] bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
+</div>
+<!-- Subliminal Image Context (Using Editorial Rule) -->
+<div class="absolute inset-0 z-0 opacity-[0.03] mix-blend-multiply">
+<img alt="Performance Background" class="w-full h-full object-cover" data-alt="dramatic black and white high-contrast photography of a professional athlete mid-sprint in a modern urban stadium" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgKlyI9RzWsGFAjsLySssY2z3A0mwYX9xbCstbiLdFgSuM-ViMShY6bsnTqugvJsp_SWU_Cbk-fBR95tt5GQ_vlkNw1qtJqOK6VliOjIbIacI7ha3qFaXy2l_St0eYdychzv1gw0wSGmrtVmMnxIvs-j7OQsXCCsGCukDO1t6cmOcYml3_wK_fKBy9Ecn42mgt925FW9Us3QJlRb5kMHIYvmUp0Keg1uFi9qNXQJcaSUtOfpbdqo8kMPxaNwzbTEpzmtzPbXej6T4"/>
+</div>
+<!-- Featured Section (Editorial Layout Hint) -->
+<div class="fixed bottom-0 left-0 w-full p-8 md:p-12 flex flex-col md:flex-row justify-between items-end pointer-events-none">
+<div class="hidden md:block">
+<p class="font-headline text-on-surface-variant/20 text-8xl font-black uppercase tracking-tighter select-none">
+                    V.02
+                </p>
+</div>
+<!-- Entry Button (Transactional Exclusion Rule doesn't apply to Splash start) -->
+<div class="pointer-events-auto">
+<button class="group relative flex items-center justify-center p-1 bg-surface-container-low rounded-full hover:bg-surface-container transition-all duration-300">
+<div class="bg-primary text-white flex items-center gap-4 py-4 px-8 rounded-full shadow-xl transition-transform active:scale-95 group-hover:bg-primary-container">
+<span class="font-label font-bold text-sm tracking-widest uppercase">Start Journey</span>
+<span class="material-symbols-outlined text-xl" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+</div>
+</div>
+</div>
+<style>
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</body></html>

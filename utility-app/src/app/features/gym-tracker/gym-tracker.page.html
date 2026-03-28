@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="gym-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gym Tracker</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="resetWorkout()">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar class="day-selector-toolbar">
+    <ion-segment [value]="selectedDay()" (ionChange)="onDayChange($event)" scrollable="true">
+      <ion-segment-button value="Monday">Mon</ion-segment-button>
+      <ion-segment-button value="Tuesday">Tue</ion-segment-button>
+      <ion-segment-button value="Wednesday">Wed</ion-segment-button>
+      <ion-segment-button value="Thursday">Thu</ion-segment-button>
+      <ion-segment-button value="Friday">Fri</ion-segment-button>
+      <ion-segment-button value="Saturday">Sat</ion-segment-button>
+      <ion-segment-button value="Sunday">Sun</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Gym Tracker</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="progress-section" *ngIf="currentWorkout()?.exercises?.length">
+    <div class="progress-header">
+      <span class="focus-text">{{ currentWorkout()?.focus }}</span>
+      <ion-badge color="primary">{{ (progress() * 100) | number:'1.0-0' }}%</ion-badge>
+    </div>
+    <ion-progress-bar [value]="progress()" color="primary" class="main-progress"></ion-progress-bar>
+  </div>
+
+  <div class="empty-state" *ngIf="!currentWorkout()?.exercises?.length">
+    <ion-icon name="calendar-outline"></ion-icon>
+    <h3>Rest Day! 😴</h3>
+    <p>Enjoy your recovery. See you tomorrow!</p>
+    <ion-button fill="clear" (click)="selectedDay.set('Monday')">Check Next Week</ion-button>
+  </div>
+
+  <ion-grid *ngIf="currentWorkout()?.exercises?.length">
+    <ion-row>
+      <ion-col size="12" *ngFor="let exercise of currentWorkout()?.exercises">
+        <ion-card class="exercise-card">
+          <ion-card-header>
+            <div class="card-header-flex">
+              <div class="exercise-meta">
+                <ion-icon [name]="exercise.icon" class="exercise-icon"></ion-icon>
+                <div>
+                  <ion-card-title>{{ exercise.name }}</ion-card-title>
+                  <ion-card-subtitle>{{ exercise.reps }} reps</ion-card-subtitle>
+                </div>
+              </div>
+              <ion-badge color="light">{{ exercise.sets }} Sets</ion-badge>
+            </div>
+          </ion-card-header>
+          
+          <ion-card-content>
+            <div class="sets-row">
+              <div 
+                *ngFor="let completed of exercise.completedSets; let i = index" 
+                class="set-bubble"
+                [class.completed]="completed"
+                (click)="toggleSet(exercise, i)"
+              >
+                {{ i + 1 }}
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div style="height: 100px;"></div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="saveWorkout()" color="success" [disabled]="progress() === 0">
+      <ion-icon name="save-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

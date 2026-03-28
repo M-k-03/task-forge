@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StorageService } from '../../../core/services/storage.service';
+import { FirestoreService } from '../../../core/services/firestore.service';
 import { STORAGE_KEYS, DEFAULT_WATER_CAN_PRICE } from '../../../core/constants/app.constants';
 import {
   WaterEntry,
@@ -13,10 +14,15 @@ import {
 /**
  * Service handling all business logic for the Water Can Tracker feature.
  * Manages CRUD operations and weekly/monthly summary calculations.
- * Uses BehaviorSubjects for reactive updates.
+ * Uses Dual Sync: LocalStorage (Offline) + Firestore (Cloud).
  */
 @Injectable({ providedIn: 'root' })
 export class WaterTrackerService {
+  private storage = inject(StorageService);
+  private firestore = inject(FirestoreService);
+
+  private readonly COLLECTION_PATH = 'water_entries';
+
   /** Reactive stream of entries */
   private entriesSubject = new BehaviorSubject<WaterEntry[]>([]);
   entries$ = this.entriesSubject.asObservable();
@@ -25,7 +31,7 @@ export class WaterTrackerService {
   private weeklyCache: WeeklySummary[] | null = null;
   private monthlyCache: MonthlySummary[] | null = null;
 
-  constructor(private storage: StorageService) {
+  constructor() {
     this.refreshEntries();
   }
 
@@ -51,36 +57,55 @@ export class WaterTrackerService {
 
   /**
    * Add a new water can purchase entry, then refresh the view.
+   * Syncs to both LocalStorage and Firestore.
    */
-  addEntry(
+  async addEntry(
     cans: number,
     pricePerCan: number = DEFAULT_WATER_CAN_PRICE,
     note?: string
-  ): WaterEntry {
+  ): Promise<WaterEntry> {
     const entry: WaterEntry = {
       id: this.generateId(),
       cans,
       pricePerCan,
       totalCost: cans * pricePerCan,
+      totalLiters: cans * 20, // Standard 20L can
       date: new Date().toISOString(),
-      note,
+      ...(note ? { note } : {}),
     };
 
+    // 1. Save locally
     const entries = this.getAllEntries();
     entries.push(entry);
     this.storage.set(STORAGE_KEYS.WATER_ENTRIES, entries);
     this.refreshEntries();
+
+    // 2. Sync to cloud (Fire & Forget, or handling error if needed)
+    try {
+      await this.firestore.setDocument(this.COLLECTION_PATH, entry.id, entry);
+    } catch (error) {
+      console.error('Firestore sync failed, local data preserved:', error);
+    }
 
     return entry;
   }
 
   /**
    * Delete an entry by its ID, then refresh the view.
+   * Syncs deletion to both LocalStorage and Firestore.
    */
-  deleteEntry(id: string): void {
+  async deleteEntry(id: string): Promise<void> {
+    // 1. Remove locally
     const entries = this.getAllEntries().filter((e) => e.id !== id);
     this.storage.set(STORAGE_KEYS.WATER_ENTRIES, entries);
     this.refreshEntries();
+
+    // 2. Sync deletion to cloud
+    try {
+      await this.firestore.deleteDocument(this.COLLECTION_PATH, id);
+    } catch (error) {
+      console.error('Firestore deletion failed:', error);
+    }
   }
 
   /**
@@ -88,6 +113,24 @@ export class WaterTrackerService {
    */
   getTotalSpent(): number {
     return this.getAllEntries().reduce((sum, entry) => sum + entry.totalCost, 0);
+  }
+
+  /**
+   * Get total liters for current week.
+   */
+  getWeeklyLiters(): number {
+    const currentWeekStart = this.getWeekStart(new Date()).toISOString().split('T')[0];
+    const summaries = this.getWeeklySummaries();
+    const current = summaries.find(s => s.weekStart.split('T')[0] === currentWeekStart);
+    return current ? current.totalCans * 20 : 0;
+  }
+
+  /**
+   * Get total liters for current month.
+   */
+  getMonthlyLiters(): number {
+    const summaries = this.getMonthlySummaries();
+    return summaries.length > 0 ? summaries[0].totalCans * 20 : 0;
   }
 
   /**

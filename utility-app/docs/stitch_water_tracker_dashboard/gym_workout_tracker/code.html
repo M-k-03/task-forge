@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Journal - Workout Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#9fcaff",
+              "surface-container": "#eceeef",
+              "background": "#f8fafb",
+              "outline": "#717782",
+              "on-tertiary-fixed": "#002204",
+              "surface-tint": "#0061a4",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#9fcaff",
+              "surface-container-highest": "#e1e3e4",
+              "tertiary-fixed": "#a3f69c",
+              "inverse-on-surface": "#eff1f2",
+              "secondary-container": "#ff6f39",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d8dadb",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "on-background": "#191c1d",
+              "on-surface-variant": "#414750",
+              "primary-container": "#0061a4",
+              "secondary-fixed-dim": "#ffb59c",
+              "surface-bright": "#f8fafb",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#00497d",
+              "on-tertiary-container": "#99ec93",
+              "surface-container-low": "#f2f4f5",
+              "on-primary-container": "#c0dbff",
+              "primary-fixed": "#d1e4ff",
+              "on-surface": "#191c1d",
+              "tertiary": "#005312",
+              "surface": "#f8fafb",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#1c6d24",
+              "on-tertiary-fixed-variant": "#005312",
+              "outline-variant": "#c1c7d2",
+              "surface-variant": "#e1e3e4",
+              "on-secondary-fixed": "#390c00",
+              "primary": "#00497d",
+              "inverse-surface": "#2e3132",
+              "secondary-fixed": "#ffdbcf",
+              "on-secondary-container": "#611b00",
+              "secondary": "#ab3600",
+              "tertiary-fixed-dim": "#88d982",
+              "error-container": "#ffdad6",
+              "surface-container-high": "#e6e8e9",
+              "on-primary-fixed": "#001d36",
+              "on-secondary-fixed-variant": "#822700"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-50/60 dark:bg-slate-900/60 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-700 dark:text-blue-400 cursor-pointer transition-opacity hover:opacity-80 active:scale-95 duration-200">menu</span>
+<h1 class="font-['Lexend'] font-bold tracking-tight text-slate-900 dark:text-slate-50 text-xl md:text-2xl">Kinetic Journal</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center px-8">
+<a class="font-['Lexend'] text-sm font-semibold tracking-wide text-slate-500 hover:text-blue-700 transition-colors" href="#">PLANS</a>
+<a class="font-['Lexend'] text-sm font-semibold tracking-wide text-blue-700" href="#">WORKOUTS</a>
+<a class="font-['Lexend'] text-sm font-semibold tracking-wide text-slate-500 hover:text-blue-700 transition-colors" href="#">STATS</a>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary-fixed">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a fit athlete in a gym setting with soft moody lighting and blurred gym equipment background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkNm-4obQ86ErldjlPPXmjVhr7GwvC0cMEziwb1f4GAYGOz6OfVzMsp3Jn3PCc5NpeEGI3KoroToQwxNDu3w4-2iZo3SGsjlNowfiBGEoCj9Pup6Kt6kTn1JwLi3qInjHWbsK9YBUamn_4G23YpjSI8AUTR0mJD-zi5eE_d5KxB2slKx9w3NswUvC5G-Rg27baMNYeiGogq_0NF6JnCu5MX5MCsLq_vqVE1QEOHW7vXv_p5xtJgdxHPPk5CQvEqqsbYyP90lSaWXc"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-8 max-w-screen-xl mx-auto min-h-screen">
+<!-- Hero Strategy: Intentional Asymmetry -->
+<section class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="max-w-2xl">
+<span class="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">Weekly Performance</span>
+<h2 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-none text-on-background">
+                    KINETIC <span class="text-secondary italic">ELITE</span> PHASE
+                </h2>
+<p class="font-body text-on-surface-variant mt-4 text-lg max-w-md">
+                    Targeting hypertrophy and metabolic conditioning through structured muscle-group isolation.
+                </p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-secondary shadow-sm min-w-[280px]">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-outline">Energy Burned</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-4xl font-bold">2,840</span>
+<span class="font-label text-sm font-semibold text-outline">KCAL / WK</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[65%]"></div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Workout View -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Monday: Chest & Triceps - Primary Impact -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group border-l-4 border-secondary">
+<div class="p-8">
+<div class="flex justify-between items-start mb-8">
+<div>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-secondary">Monday</span>
+<h3 class="font-headline text-3xl font-bold mt-1">Chest &amp; Triceps</h3>
+</div>
+<button class="bg-secondary text-on-secondary px-6 py-2.5 rounded-full font-label text-sm font-bold tracking-wide active:scale-95 transition-transform">START SESSION</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">fitness_center</span>
+</div>
+<div>
+<p class="font-headline text-sm font-bold">Flat Press - D/B</p>
+<p class="font-body text-xs text-outline">3-4 sets | 8-12 reps</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">fitness_center</span>
+</div>
+<div>
+<p class="font-headline text-sm font-bold">Incline Press - D/B</p>
+<p class="font-body text-xs text-outline">3-4 sets | 8-12 reps</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">fitness_center</span>
+</div>
+<div>
+<p class="font-headline text-sm font-bold">Cable Flys</p>
+<p class="font-body text-xs text-outline">3 sets | 12-15 reps</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">fitness_center</span>
+</div>
+<div>
+<p class="font-headline text-sm font-bold">Tricep Pushdowns</p>
+<p class="font-body text-xs text-outline">3 sets | 10-12 reps</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h-32 bg-secondary/5 relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-20" data-alt="Professional grade olympic weight bench in a high-end commercial gym with dramatic rim lighting and shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl6ic0tA6d2ZZC7oUSswY_abYKSsPUOT3Axw5YvVOaTj2TyZAoeBAu0pbl2QvMNdmkXQe15yxYfVT5JpDQCfe4rzsqM8z4gos_m5VH47aFyKqiYlkZTeBTjlX0jDqAzfpzFRtFvtEyWjJ4sf5oQ5d654SIE7Ia0Bqb2IDJ1NUk4sCHwDOqNvnoASQ7TXDCvQDsI3q2S7RvyPqPcSBlGYaXdZYoyb0QVrt4j-rk4oHR1waDVjUUY7m32yQfOZzNGlz641xsi3YkLM8"/>
+</div>
+</div>
+<!-- Tuesday: Back & Biceps -->
+<div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 border-l-4 border-secondary flex flex-col justify-between">
+<div>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-outline">Tuesday</span>
+<h3 class="font-headline text-2xl font-bold mt-1">Back &amp; Biceps</h3>
+<ul class="mt-6 space-y-4">
+<li class="flex justify-between items-end border-b border-outline-variant/30 pb-2">
+<span class="font-body text-sm font-semibold">Pull Ups</span>
+<span class="font-label text-[10px] text-outline uppercase">3 Sets Max</span>
+</li>
+<li class="flex justify-between items-end border-b border-outline-variant/30 pb-2">
+<span class="font-body text-sm font-semibold">Bent Over Rows</span>
+<span class="font-label text-[10px] text-outline uppercase">3 x 10</span>
+</li>
+<li class="flex justify-between items-end border-b border-outline-variant/30 pb-2">
+<span class="font-body text-sm font-semibold">Lat Pulldown</span>
+<span class="font-label text-[10px] text-outline uppercase">3 x 12</span>
+</li>
+<li class="flex justify-between items-end border-b border-outline-variant/30 pb-2">
+<span class="font-body text-sm font-semibold">Bicep Curls</span>
+<span class="font-label text-[10px] text-outline uppercase">3 x 10</span>
+</li>
+</ul>
+</div>
+<button class="mt-8 text-secondary font-label text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:opacity-70 transition-opacity">
+                    VIEW ALL EXERCISES <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Wednesday: Legs -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 border-l-4 border-secondary flex flex-col shadow-sm">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-outline">Wednesday</span>
+<h3 class="font-headline text-2xl font-bold mt-1">Legs</h3>
+<div class="mt-6 space-y-3">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-headline text-sm font-bold">Barbell Squats</p>
+<p class="font-body text-xs text-outline">4 sets | 6-8 reps</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-headline text-sm font-bold">Leg Press</p>
+<p class="font-body text-xs text-outline">3 sets | 12 reps</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-headline text-sm font-bold">Calf Raises</p>
+<p class="font-body text-xs text-outline">4 sets | 15 reps</p>
+</div>
+</div>
+</div>
+<!-- Thursday: Shoulders -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl p-8 border-l-4 border-secondary flex flex-col shadow-sm">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-outline">Thursday</span>
+<h3 class="font-headline text-2xl font-bold mt-1">Shoulders</h3>
+<div class="mt-6 flex-grow">
+<div class="flex items-start gap-4 mb-4">
+<div class="text-secondary font-headline text-2xl font-bold italic opacity-30">01</div>
+<div>
+<p class="font-headline text-sm font-bold uppercase tracking-tight">Overhead Press</p>
+<p class="font-body text-xs text-outline">3 sets | 8-10 reps</p>
+</div>
+</div>
+<div class="flex items-start gap-4 mb-4">
+<div class="text-secondary font-headline text-2xl font-bold italic opacity-30">02</div>
+<div>
+<p class="font-headline text-sm font-bold uppercase tracking-tight">Lateral Raises</p>
+<p class="font-body text-xs text-outline">4 sets | 15 reps</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="text-secondary font-headline text-2xl font-bold italic opacity-30">03</div>
+<div>
+<p class="font-headline text-sm font-bold uppercase tracking-tight">Face Pulls</p>
+<p class="font-body text-xs text-outline">3 sets | 12 reps</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Friday: Abs & Saturday: Cardio - Combined Bento -->
+<div class="md:col-span-4 grid grid-rows-2 gap-6">
+<!-- Friday -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border-l-4 border-secondary shadow-sm">
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-outline">Friday</span>
+<h3 class="font-headline text-xl font-bold mb-4">Abs</h3>
+<div class="flex gap-2 flex-wrap">
+<span class="bg-surface-container-high px-3 py-1.5 rounded-full font-label text-[10px] font-bold">PLANK 3x60S</span>
+<span class="bg-surface-container-high px-3 py-1.5 rounded-full font-label text-[10px] font-bold">LEG RAISES 3x20</span>
+<span class="bg-surface-container-high px-3 py-1.5 rounded-full font-label text-[10px] font-bold">CRUNCHES 3x30</span>
+</div>
+</div>
+<!-- Saturday -->
+<div class="bg-inverse-surface rounded-xl p-6 border-l-4 border-secondary shadow-sm relative overflow-hidden group">
+<div class="relative z-10">
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Saturday</span>
+<h3 class="font-headline text-xl font-bold text-inverse-on-surface">Cardio Burn</h3>
+<p class="font-body text-xs text-inverse-on-surface/60 mt-2">HIIT: 30 min intervals</p>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl text-on-surface/10 rotate-12 group-hover:rotate-0 transition-transform duration-500">sprint</span>
+</div>
+</div>
+</div>
+<!-- Motivation Layer -->
+<section class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="rounded-3xl overflow-hidden aspect-video relative group">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Motivational image of heavy iron weights in a moody warehouse gym with dust motes dancing in shafts of natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ6Z47HSpLq-w302bLARJ-DhjYpwjQeF2iAavNkm-x4KdhWKGhHpq5c-5iIup_oAF_gpc7sTqb0xV34_0UVEAH02FPFhpMn0_YTSVBTT17XVivv0u3oMHFQtqqv8ymDq32FTMj2axghxB7YqVFLpZq4P24h2ZzkGz1ZP2NRlrGpCK2-o8S7o9d5HATTV0bG3VxUVT75wxfmjs5yBPT1dknJDOtCPqU_fe1XBtLQLAUXpmtzQXE0RplelCQIEXXvnffJ5gKQaBEfx0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<p class="font-headline text-2xl font-bold text-white leading-tight">"The difference between who you are and who you want to be is what you do."</p>
+</div>
+</div>
+<div class="px-4">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-1.5 h-12 bg-secondary"></div>
+<h4 class="font-headline text-3xl font-extrabold tracking-tighter">PROGRESS<br/>INSIGHTS</h4>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between font-label text-xs font-bold mb-2 uppercase">
+<span>Hydration Level</span>
+<span class="text-secondary">82%</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[82%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label text-xs font-bold mb-2 uppercase">
+<span>Muscle Fatigue</span>
+<span class="text-tertiary">Low</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-[30%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label text-xs font-bold mb-2 uppercase">
+<span>Weekly Consistency</span>
+<span class="text-secondary">95%</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[95%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/70 dark:bg-slate-950/70 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-8px_30px_rgb(0,0,0,0.04)] dark:shadow-none border-t border-slate-200/20 dark:border-slate-800/20 md:hidden">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-500 active:scale-90 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-1">water_drop</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Water</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-2xl px-5 py-2 transition-all active:scale-90 duration-300" href="#">
+<span class="material-symbols-outlined mb-1">fitness_center</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Gym</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:text-blue-500 active:scale-90 transition-all duration-300" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+</body></html>

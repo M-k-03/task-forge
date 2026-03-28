@@ -1,27 +1,49 @@
-<app-header title="Water Can Tracker"></app-header>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <!-- Hero Header -->
+  <div class="header-insight">
+    <h1>Hydration Insights</h1>
+    <p>Monitoring your recovery and metabolic cost.</p>
+  </div>
 
-<ion-content class="ion-padding">
-  <!-- Stats Cards -->
-  <div class="stats-grid">
-    <ion-card class="stat-card">
+  <!-- Dashboard Overview (Inspired by high-fidelity design) -->
+  <div class="dashboard-grid">
+    <!-- Hero Card: Weekly Consumption -->
+    <ion-card class="hero-card">
       <ion-card-content>
-        <div class="stat-icon-wrapper blue">
-          <ion-icon name="water"></ion-icon>
+        <div class="hero-meta">
+          <ion-icon name="water" class="hero-icon"></ion-icon>
+          <span class="hero-label">{{ usageType === 'weekly' ? 'Weekly' : 'Monthly' }} Consumption</span>
         </div>
-        <div class="stat-value">{{ totalCans }}</div>
-        <div class="stat-label">Total Cans</div>
+        <div class="hero-main">
+          <span class="value">{{ heroLiters }}</span>
+          <span class="unit">Liters</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bg">
+            <div class="progress-fill" [style.width.%]="70"></div>
+          </div>
+        </div>
+        <img src="assets/water_splash.png" class="hero-bg-img" alt="Water Splash"/>
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="stat-card">
-      <ion-card-content>
-        <div class="stat-icon-wrapper green">
-          <ion-icon name="cash"></ion-icon>
-        </div>
-        <div class="stat-value">{{ totalSpent | appCurrency }}</div>
-        <div class="stat-label">Total Spent</div>
-      </ion-card-content>
-    </ion-card>
+    <div class="stats-mini-grid">
+      <!-- Mini Card: Total Cans -->
+      <ion-card class="mini-card mini-blue">
+        <ion-card-content>
+          <div class="mini-label">Total Cans</div>
+          <div class="mini-val">{{ totalCans }}</div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Mini Card: Total Spent -->
+      <ion-card class="mini-card mini-green">
+        <ion-card-content>
+          <div class="mini-label">Total Spent</div>
+          <div class="mini-val">{{ totalSpent | appCurrency }}</div>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 
   <!-- Usage Section with Toggle -->
@@ -43,14 +65,15 @@
   </div>
 
   <!-- Add Entry Form -->
-  <ion-card class="add-card">
-    <ion-card-header>
+  <ion-card class="add-card" [ngClass]="{'minimized': !isFormVisible}">
+    <ion-card-header (click)="toggleFormVisibility()" class="toggle-header">
       <ion-card-title class="form-title">
-        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-icon [name]="isFormVisible ? 'remove-circle-outline' : 'add-circle-outline'"></ion-icon>
         Add Purchase
       </ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    
+    <ion-card-content *ngIf="isFormVisible" class="form-body">
       <ion-item lines="none" class="input-item">
         <ion-label position="stacked">Number of Cans</ion-label>
         <ion-input
@@ -74,7 +97,7 @@
       </ion-item>
 
       <ion-item lines="none" class="input-item">
-        <ion-label position="stacked">Note (optional)</ion-label>
+        <ion-label position="stacked">Comments (optional)</ion-label>
         <ion-input
           type="text"
           [(ngModel)]="newNote"
@@ -99,8 +122,13 @@
   </ion-card>
 
   <!-- Purchase History -->
-  <app-water-history
-    [entries]="entries"
-    (onDelete)="deleteEntry($event)"
-  ></app-water-history>
+  <div class="history-container">
+    <app-water-history
+      [entries]="(entries$ | async) || []"
+      (onDelete)="deleteEntry($event)"
+    ></app-water-history>
+  </div>
+
+  <!-- Spacer for Android Navigation Bar -->
+  <div class="android-spacer"></div>
 </ion-content>

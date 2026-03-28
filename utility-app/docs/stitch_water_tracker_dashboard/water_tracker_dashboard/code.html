@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Journal | Water Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#9fcaff",
+              "surface-container": "#eceeef",
+              "background": "#f8fafb",
+              "outline": "#717782",
+              "on-tertiary-fixed": "#002204",
+              "surface-tint": "#0061a4",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#9fcaff",
+              "surface-container-highest": "#e1e3e4",
+              "tertiary-fixed": "#a3f69c",
+              "inverse-on-surface": "#eff1f2",
+              "secondary-container": "#ff6f39",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d8dadb",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "on-background": "#191c1d",
+              "on-surface-variant": "#414750",
+              "primary-container": "#0061a4",
+              "secondary-fixed-dim": "#ffb59c",
+              "surface-bright": "#f8fafb",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#00497d",
+              "on-tertiary-container": "#99ec93",
+              "surface-container-low": "#f2f4f5",
+              "on-primary-container": "#c0dbff",
+              "primary-fixed": "#d1e4ff",
+              "on-surface": "#191c1d",
+              "tertiary": "#005312",
+              "surface": "#f8fafb",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#1c6d24",
+              "on-tertiary-fixed-variant": "#005312",
+              "outline-variant": "#c1c7d2",
+              "surface-variant": "#e1e3e4",
+              "on-secondary-fixed": "#390c00",
+              "primary": "#00497d",
+              "inverse-surface": "#2e3132",
+              "secondary-fixed": "#ffdbcf",
+              "on-secondary-container": "#611b00",
+              "secondary": "#ab3600",
+              "tertiary-fixed-dim": "#88d982",
+              "error-container": "#ffdad6",
+              "surface-container-high": "#e6e8e9",
+              "on-primary-fixed": "#001d36",
+              "on-secondary-fixed-variant": "#822700"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8fafb;
+            color: #191c1d;
+            font-family: 'Manrope', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<header class="fixed top-0 w-full z-50 bg-slate-50/60 backdrop-blur-xl">
+<div class="flex justify-between items-center px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-blue-700">menu</span>
+<h1 class="font-['Lexend'] font-bold tracking-tight text-slate-900 text-xl">Kinetic Journal</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="high quality studio portrait of a friendly young professional man with short dark hair and modern glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq-UeIcJzr7MV2ppc6XC2aC_L_jPlis3IpmbzxbXByEH8bBICSOrqhuYXhx_Dh_9maIoJciwRHA_Ocyvlu2QMYHcUvvgwxBmeAyplk6ddnH9eosVfqxfmUlgL_onlfNTmRZKsncdPYIH1NMeFmgGJkSj8ctHQ4jEynFnDAEAyxmySEQgmFiprfd9rem-fpFQ3yMe_yfSoH80RXzv9KxM363PnR1gCTs8K9VOJ3X3M64zHNjfwGwUJFuxEMMt17gWM9zf2UKjwnnPQ"/>
+</div>
+</div>
+</header>
+<main class="max-w-screen-xl mx-auto px-6 pt-24 pb-12">
+<section class="mb-10">
+<h2 class="font-headline text-display-lg font-extrabold tracking-tight text-primary mb-2">Hydration Insights</h2>
+<p class="font-body text-on-surface-variant">Monitoring your water consumption and metabolic cost.</p>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-lowest p-8 rounded-[2rem] shadow-[0_12px_32px_rgba(25,28,29,0.06)] flex flex-col justify-between aspect-square md:aspect-auto">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="payments">payments</span>
+<p class="font-label text-label-sm uppercase tracking-widest text-outline">Total Expenses</p>
+</div>
+<div class="mt-4">
+<h3 class="font-headline text-4xl font-bold text-on-background">$1,240.50</h3>
+<p class="font-body text-sm text-tertiary mt-2">− 12% from last month</p>
+</div>
+</div>
+<div class="bg-primary p-8 rounded-[2rem] shadow-[0_12px_32px_rgba(0,73,125,0.15)] flex flex-col justify-between text-white relative overflow-hidden aspect-square md:aspect-auto">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-4" data-icon="water_drop" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<p class="font-label text-label-sm uppercase tracking-widest text-primary-fixed/80">Weekly Consumption</p>
+</div>
+<div class="mt-4 relative z-10">
+<h3 class="font-headline text-4xl font-bold">142 Liters</h3>
+<div class="w-full bg-white/20 h-1.5 rounded-full mt-4">
+<div class="bg-white h-full rounded-full" style="width: 78%"></div>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[12rem]" data-icon="opacity">opacity</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-[2rem] flex flex-col justify-between aspect-square md:aspect-auto">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-4" data-icon="calendar_month">calendar_month</span>
+<p class="font-label text-label-sm uppercase tracking-widest text-outline">Monthly Consumption</p>
+</div>
+<div class="mt-4">
+<h3 class="font-headline text-4xl font-bold text-on-background">582 L</h3>
+<p class="font-body text-sm text-on-surface-variant mt-2">Avg 19.4 L / day</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<div class="lg:col-span-8">
+<div class="flex justify-between items-end mb-8">
+<h3 class="font-headline text-headline-sm font-bold text-on-background">Purchase History</h3>
+<button class="font-label text-sm font-semibold text-primary flex items-center gap-2 hover:opacity-70 transition-opacity">
+                        View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest p-6 rounded-3xl flex items-center justify-between group hover:bg-surface-container-low transition-colors duration-300">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background">Fresh Springs Premium</h4>
+<p class="font-body text-sm text-outline">Oct 24, 2023 • 09:15 AM</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-8">
+<div class="hidden sm:block">
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-1">Quantity</p>
+<p class="font-headline font-semibold text-on-background">5 Cans (100L)</p>
+</div>
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-1">Price</p>
+<p class="font-headline font-bold text-primary">$45.00</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-3xl flex items-center justify-between group hover:bg-surface-container-low transition-colors duration-300">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background">Alpine Pure Hydration</h4>
+<p class="font-body text-sm text-outline">Oct 18, 2023 • 02:30 PM</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-8">
+<div class="hidden sm:block">
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-1">Quantity</p>
+<p class="font-headline font-semibold text-on-background">3 Cans (60L)</p>
+</div>
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-1">Price</p>
+<p class="font-headline font-bold text-primary">$28.50</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-3xl flex items-center justify-between group hover:bg-surface-container-low transition-colors duration-300">
+<div class="flex items-center gap-6">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background">Mineral Flow Bulk</h4>
+<p class="font-body text-sm text-outline">Oct 12, 2023 • 11:00 AM</p>
+</div>
+</div>
+<div class="text-right flex items-center gap-8">
+<div class="hidden sm:block">
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-1">Quantity</p>
+<p class="font-headline font-semibold text-on-background">10 Cans (200L)</p>
+</div>
+<div>
+<p class="font-label text-xs uppercase tracking-widest text-outline mb-1">Price</p>
+<p class="font-headline font-bold text-primary">$82.00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-surface-container-highest p-8 rounded-[2.5rem] relative overflow-hidden">
+<h3 class="font-headline text-headline-sm font-bold mb-4">Stock Alert</h3>
+<p class="font-body text-on-surface-variant mb-6">You have 2 cans remaining. Estimated to last 3 days.</p>
+<button class="w-full bg-primary text-white font-headline font-bold py-4 rounded-2xl shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
+                        Order Now
+                    </button>
+<div class="mt-8 pt-8 border-t border-outline-variant/30">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-sm text-outline uppercase tracking-wider">Storage Capacity</span>
+<span class="font-headline font-bold text-primary">20%</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 20%"></div>
+</div>
+</div>
+</div>
+<div class="relative rounded-[2.5rem] overflow-hidden aspect-square lg:aspect-video shadow-xl">
+<img alt="Refreshing water" class="w-full h-full object-cover" data-alt="Crystal clear water splashing in a glass with soft morning light and a clean minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbSAsJf72hO4k18upV9zEGrUX-ty12m0zsW3Yzj23v9X3WNgiRrYfLFKKVCQ21Xm8P4hjjwxQicKR3HqjkVkrMUgRNUXWiKLKRhUsZIpuFULWNx8RVbMDBJBxDMaykyDPmYJwVpCRcXos8Cf_2Ooj091CY-h3uBLCsXmSLh1AnxGKB7Yg6DENvdcQF6_6HHEQKRjvEza24WVb7oXCZNc1uNaXbhYAFHiVaoqmFiKGVfZ-4mUOCcdvljbWiSqWNBVGlTE21WNarXkg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-8">
+<div>
+<span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-widest mb-2 inline-block">Daily Tip</span>
+<h4 class="text-white font-headline font-bold text-xl leading-tight">Hydration boosts cognitive focus by 14%. Keep drinking.</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/70 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
+<div class="flex flex-col items-center justify-center bg-blue-50 text-blue-700 rounded-2xl px-5 py-2 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="water_drop" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Water</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-blue-500 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Gym</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-blue-500 transition-all active:scale-90 duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</div>
+</nav>
+<div class="fixed right-6 bottom-24 z-40">
+<button class="w-16 h-16 bg-secondary text-on-secondary rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+</button>
+</div>
+</body></html>

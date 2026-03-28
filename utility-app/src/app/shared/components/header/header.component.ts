@@ -1,6 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { 
+  IonHeader, 
+  IonToolbar, 
+  IonButtons, 
+  IonBackButton, 
+  IonTitle 
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { arrowBack } from 'ionicons/icons';
 
 /**
  * Reusable page header with back button support.
@@ -11,7 +19,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [CommonModule, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle],
   template: `
     <ion-header>
       <ion-toolbar color="primary">
@@ -40,4 +48,8 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   @Input() title: string = '';
   @Input() showBack: boolean = true;
+
+  constructor() {
+    addIcons({ 'arrow-back': arrowBack });
+  }
 }

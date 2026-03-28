@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Journal - Workout Tracker</title>
+<!-- Ionic Framework -->
+<script src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js" type="module"></script>
+<script nomodule="" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#9fcaff",
+              "surface-container": "#eceeef",
+              "background": "#f8fafb",
+              "outline": "#717782",
+              "on-tertiary-fixed": "#002204",
+              "surface-tint": "#0061a4",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#9fcaff",
+              "surface-container-highest": "#e1e3e4",
+              "tertiary-fixed": "#a3f69c",
+              "inverse-on-surface": "#eff1f2",
+              "secondary-container": "#ff6f39",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d8dadb",
+              "on-error-container": "#93000a",
+              "error": "#ba1a1a",
+              "on-background": "#191c1d",
+              "on-surface-variant": "#414750",
+              "primary-container": "#0061a4",
+              "secondary-fixed-dim": "#ffb59c",
+              "surface-bright": "#f8fafb",
+              "on-primary": "#ffffff",
+              "on-primary-fixed-variant": "#00497d",
+              "on-tertiary-container": "#99ec93",
+              "surface-container-low": "#f2f4f5",
+              "on-primary-container": "#c0dbff",
+              "primary-fixed": "#d1e4ff",
+              "on-surface": "#191c1d",
+              "tertiary": "#005312",
+              "surface": "#f8fafb",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#1c6d24",
+              "on-tertiary-fixed-variant": "#005312",
+              "outline-variant": "#c1c7d2",
+              "surface-variant": "#e1e3e4",
+              "on-secondary-fixed": "#390c00",
+              "primary": "#00497d",
+              "inverse-surface": "#2e3132",
+              "secondary-fixed": "#ffdbcf",
+              "on-secondary-container": "#611b00",
+              "secondary": "#ab3600",
+              "tertiary-fixed-dim": "#88d982",
+              "error-container": "#ffdad6",
+              "surface-container-high": "#e6e8e9",
+              "on-primary-fixed": "#001d36",
+              "on-secondary-fixed-variant": "#822700"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      :root {
+        --ion-font-family: 'Manrope', sans-serif;
+        --ion-color-primary: #00497d;
+        --ion-color-secondary: #ab3600;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      ion-content {
+        --background: #f8fafb;
+      }
+      ion-item {
+        --padding-start: 0;
+        --inner-padding-end: 0;
+        --background: transparent;
+      }
+      ion-list {
+        background: transparent !important;
+        padding: 0 !important;
+      }
+      .kinetic-card {
+        border-left: 4px solid #ab3600;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<ion-app>
+<!-- TopAppBar -->
+<ion-header class="ion-no-border">
+<ion-toolbar class="px-2" style="--background: rgba(248, 250, 251, 0.8); backdrop-filter: blur(20px);">
+<ion-buttons slot="start">
+<ion-menu-button class="text-primary"></ion-menu-button>
+</ion-buttons>
+<ion-title class="font-headline font-bold text-on-background tracking-tight">Task Forge</ion-title>
+<ion-buttons slot="end">
+<ion-avatar class="w-8 h-8 mr-2 border-2 border-primary-fixed">
+<img alt="User" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkNm-4obQ86ErldjlPPXmjVhr7GwvC0cMEziwb1f4GAYGOz6OfVzMsp3Jn3PCc5NpeEGI3KoroToQwxNDu3w4-2iZo3SGsjlNowfiBGEoCj9Pup6Kt6kTn1JwLi3qInjHWbsK9YBUamn_4G23YpjSI8AUTR0mJD-zi5eE_d5KxB2slKx9w3NswUvC5G-Rg27baMNYeiGogq_0NF6JnCu5MX5MCsLq_vqVE1QEOHW7vXv_p5xtJgdxHPPk5CQvEqqsbYyP90lSaWXc"/>
+</ion-avatar>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+<main class="max-w-screen-xl mx-auto pb-20">
+<!-- Hero Section -->
+<section class="mb-10 pt-4">
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary mb-1 block">Weekly Performance</span>
+<h2 class="font-headline text-5xl font-extrabold tracking-tighter leading-none text-on-background">
+                        KINETIC <span class="text-secondary italic">ELITE</span> PHASE
+                    </h2>
+<p class="font-body text-on-surface-variant mt-4 text-sm max-w-xs leading-relaxed">
+                        Targeting hypertrophy and metabolic conditioning through structured muscle-group isolation.
+                    </p>
+<div class="bg-surface-container-lowest p-6 rounded-xl kinetic-card shadow-sm mt-8">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Energy Burned</span>
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline text-4xl font-bold">2,840</span>
+<span class="font-label text-[10px] font-semibold text-outline">KCAL / WK</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[65%]"></div>
+</div>
+</div>
+</section>
+<!-- Monday: Chest & Triceps -->
+<section class="mb-8">
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm kinetic-card">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">Monday</span>
+<h3 class="font-headline text-2xl font-bold mt-1">Chest &amp; Triceps</h3>
+</div>
+<ion-button class="font-label text-[10px] font-bold tracking-widest h-9" color="secondary" mode="ios" shape="round">
+                                    START SESSION
+                                </ion-button>
+</div>
+<ion-list lines="none">
+<ion-item class="mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-secondary text-xl">fitness_center</span>
+</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold m-0">Flat Press - D/B</h4>
+<p class="font-body text-xs text-outline m-0">3-4 sets | 8-12 reps</p>
+</ion-label>
+</ion-item>
+<ion-item class="mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-secondary text-xl">fitness_center</span>
+</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold m-0">Incline Press - D/B</h4>
+<p class="font-body text-xs text-outline m-0">3-4 sets | 8-12 reps</p>
+</ion-label>
+</ion-item>
+<ion-item class="mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-secondary text-xl">fitness_center</span>
+</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold m-0">Cable Flys</h4>
+<p class="font-body text-xs text-outline m-0">3 sets | 12-15 reps</p>
+</ion-label>
+</ion-item>
+<ion-item>
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-secondary text-xl">fitness_center</span>
+</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold m-0">Tricep Pushdowns</h4>
+<p class="font-body text-xs text-outline m-0">3 sets | 10-12 reps</p>
+</ion-label>
+</ion-item>
+</ion-list>
+</div>
+<div class="h-24 bg-secondary/5 relative overflow-hidden">
+<img class="w-full h-full object-cover opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl6ic0tA6d2ZZC7oUSswY_abYKSsPUOT3Axw5YvVOaTj2TyZAoeBAu0pbl2QvMNdmkXQe15yxYfVT5JpDQCfe4rzsqM8z4gos_m5VH47aFyKqiYlkZTeBTjlX0jDqAzfpzFRtFvtEyWjJ4sf5oQ5d654SIE7Ia0Bqb2IDJ1NUk4sCHwDOqNvnoASQ7TXDCvQDsI3q2S7RvyPqPcSBlGYaXdZYoyb0QVrt4j-rk4oHR1waDVjUUY7m32yQfOZzNGlz641xsi3YkLM8"/>
+</div>
+</div>
+</section>
+<!-- Tuesday: Back & Biceps -->
+<section class="mb-8">
+<div class="bg-surface-container-low rounded-xl p-6 kinetic-card">
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Tuesday</span>
+<h3 class="font-headline text-2xl font-bold mt-1 mb-4">Back &amp; Biceps</h3>
+<ion-list lines="full">
+<ion-item>
+<ion-label class="font-body text-sm font-semibold">Pull Ups</ion-label>
+<ion-badge class="font-label text-[8px] font-bold tracking-widest text-outline" color="light" mode="ios" slot="end">3 SETS MAX</ion-badge>
+</ion-item>
+<ion-item>
+<ion-label class="font-body text-sm font-semibold">Bent Over Rows</ion-label>
+<ion-badge class="font-label text-[8px] font-bold tracking-widest text-outline" color="light" mode="ios" slot="end">3 X 10</ion-badge>
+</ion-item>
+<ion-item>
+<ion-label class="font-body text-sm font-semibold">Lat Pulldown</ion-label>
+<ion-badge class="font-label text-[8px] font-bold tracking-widest text-outline" color="light" mode="ios" slot="end">3 X 12</ion-badge>
+</ion-item>
+<ion-item>
+<ion-label class="font-body text-sm font-semibold">Bicep Curls</ion-label>
+<ion-badge class="font-label text-[8px] font-bold tracking-widest text-outline" color="light" mode="ios" slot="end">3 X 10</ion-badge>
+</ion-item>
+</ion-list>
+<ion-button class="mt-4 ion-no-padding font-label text-[10px] font-bold uppercase tracking-widest" color="secondary" fill="clear">
+                            VIEW ALL EXERCISES
+                            <ion-icon class="text-xs ml-1" name="arrow-forward-outline" slot="end"></ion-icon>
+</ion-button>
+</div>
+</section>
+<!-- Wednesday: Legs -->
+<section class="mb-8">
+<div class="bg-surface-container-lowest rounded-xl p-6 kinetic-card shadow-sm">
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Wednesday</span>
+<h3 class="font-headline text-2xl font-bold mt-1 mb-4">Legs</h3>
+<div class="space-y-3">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-headline text-sm font-bold m-0">Barbell Squats</p>
+<p class="font-body text-[10px] text-outline mt-1 m-0">4 sets | 6-8 reps</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-headline text-sm font-bold m-0">Leg Press</p>
+<p class="font-body text-[10px] text-outline mt-1 m-0">3 sets | 12 reps</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="font-headline text-sm font-bold m-0">Calf Raises</p>
+<p class="font-body text-[10px] text-outline mt-1 m-0">4 sets | 15 reps</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Thursday: Shoulders -->
+<section class="mb-8">
+<div class="bg-surface-container-lowest rounded-xl p-6 kinetic-card shadow-sm">
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-outline">Thursday</span>
+<h3 class="font-headline text-2xl font-bold mt-1 mb-6">Shoulders</h3>
+<ion-list lines="none">
+<ion-item class="mb-4">
+<div class="text-secondary font-headline text-2xl font-bold italic opacity-30 mr-4" slot="start">01</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold uppercase tracking-tight m-0">Overhead Press</h4>
+<p class="font-body text-xs text-outline m-0">3 sets | 8-10 reps</p>
+</ion-label>
+</ion-item>
+<ion-item class="mb-4">
+<div class="text-secondary font-headline text-2xl font-bold italic opacity-30 mr-4" slot="start">02</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold uppercase tracking-tight m-0">Lateral Raises</h4>
+<p class="font-body text-xs text-outline m-0">4 sets | 15 reps</p>
+</ion-label>
+</ion-item>
+<ion-item>
+<div class="text-secondary font-headline text-2xl font-bold italic opacity-30 mr-4" slot="start">03</div>
+<ion-label>
+<h4 class="font-headline text-sm font-bold uppercase tracking-tight m-0">Face Pulls</h4>
+<p class="font-body text-xs text-outline m-0">3 sets | 12 reps</p>
+</ion-label>
+</ion-item>
+</ion-list>
+</div>
+</section>
+<!-- Friday & Saturday Combined -->
+<section class="grid grid-cols-1 gap-6 mb-8">
+<div class="bg-surface-container-lowest rounded-xl p-6 kinetic-card shadow-sm">
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-outline">Friday</span>
+<h3 class="font-headline text-xl font-bold mb-4">Abs</h3>
+<div class="flex gap-2 flex-wrap">
+<ion-badge class="font-label text-[9px] font-bold tracking-widest py-1 px-3" color="light">PLANK 3x60S</ion-badge>
+<ion-badge class="font-label text-[9px] font-bold tracking-widest py-1 px-3" color="light">LEG RAISES 3x20</ion-badge>
+<ion-badge class="font-label text-[9px] font-bold tracking-widest py-1 px-3" color="light">CRUNCHES 3x30</ion-badge>
+</div>
+</div>
+<div class="bg-inverse-surface rounded-xl p-6 kinetic-card shadow-sm relative overflow-hidden group">
+<div class="relative z-10">
+<span class="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Saturday</span>
+<h3 class="font-headline text-xl font-bold text-inverse-on-surface">Cardio Burn</h3>
+<p class="font-body text-xs text-inverse-on-surface/60 mt-2">HIIT: 30 min intervals</p>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl text-on-surface/10 rotate-12">sprint</span>
+</div>
+</section>
+<!-- Motivation Layer -->
+<section class="mt-12">
+<div class="rounded-3xl overflow-hidden aspect-[4/3] relative mb-8">
+<img class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ6Z47HSpLq-w302bLARJ-DhjYpwjQeF2iAavNkm-x4KdhWKGhHpq5c-5iIup_oAF_gpc7sTqb0xV34_0UVEAH02FPFhpMn0_YTSVBTT17XVivv0u3oMHFQtqqv8ymDq32FTMj2axghxB7YqVFLpZq4P24h2ZzkGz1ZP2NRlrGpCK2-o8S7o9d5HATTV0bG3VxUVT75wxfmjs5yBPT1dknJDOtCPqU_fe1XBtLQLAUXpmtzQXE0RplelCQIEXXvnffJ5gKQaBEfx0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<p class="font-headline text-2xl font-bold text-white leading-tight">"The difference between who you are and who you want to be is what you do."</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-1.5 h-12 bg-secondary"></div>
+<h4 class="font-headline text-3xl font-extrabold tracking-tighter">PROGRESS<br/>INSIGHTS</h4>
+</div>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between font-label text-[10px] font-bold mb-2 uppercase">
+<span>Hydration Level</span>
+<span class="text-secondary text-xs">82%</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[82%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label text-[10px] font-bold mb-2 uppercase">
+<span>Muscle Fatigue</span>
+<span class="text-tertiary text-xs">Low</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full w-[30%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label text-[10px] font-bold mb-2 uppercase">
+<span>Weekly Consistency</span>
+<span class="text-secondary text-xs">95%</span>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[95%]"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</ion-content>
+<!-- Bottom Tab Bar -->
+<ion-footer class="ion-no-border">
+<ion-tab-bar class="rounded-t-[2.5rem] shadow-lg border-t-0 h-20" slot="bottom" style="--background: rgba(255,255,255,0.8); backdrop-filter: blur(20px);">
+<ion-tab-button class="bg-transparent">
+<span class="material-symbols-outlined mb-1 text-slate-400">water_drop</span>
+<ion-label class="font-['Manrope'] text-[8px] font-bold uppercase tracking-widest text-slate-400">Water</ion-label>
+</ion-tab-button>
+<ion-tab-button class="bg-transparent">
+<div class="bg-blue-50 p-2 rounded-2xl flex flex-col items-center min-w-[60px]">
+<span class="material-symbols-outlined mb-1 text-primary">fitness_center</span>
+<ion-label class="font-['Manrope'] text-[8px] font-bold uppercase tracking-widest text-primary">Gym</ion-label>
+</div>
+</ion-tab-button>
+<ion-tab-button class="bg-transparent">
+<span class="material-symbols-outlined mb-1 text-slate-400">person</span>
+<ion-label class="font-['Manrope'] text-[8px] font-bold uppercase tracking-widest text-slate-400">Profile</ion-label>
+</ion-tab-button>
+</ion-tab-bar>
+</ion-footer>
+</ion-app>
+<script>
+      // Force light mode for this demo logic
+      document.documentElement.classList.add('light');
+    </script>
+</body></html>

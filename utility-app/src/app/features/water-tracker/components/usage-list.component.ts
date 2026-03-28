@@ -1,5 +1,16 @@
 import { Component, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { 
+  IonCard, 
+  IonCardContent, 
+  IonIcon 
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { 
+  calendarOutline, 
+  todayOutline, 
+  waterOutline, 
+  analyticsOutline 
+} from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { AppCurrencyPipe } from '../../../shared/pipes/currency.pipe';
 import { UsageSummary, UsageType } from '../models/water-entry.model';
@@ -11,7 +22,7 @@ import { UsageSummary, UsageType } from '../models/water-entry.model';
 @Component({
   selector: 'app-usage-list',
   standalone: true,
-  imports: [IonicModule, CommonModule, AppCurrencyPipe],
+  imports: [IonCard, IonCardContent, IonIcon, CommonModule, AppCurrencyPipe],
   template: `
     <div class="usage-list" *ngIf="summaries.length > 0; else noData">
       <ion-card
@@ -179,6 +190,15 @@ import { UsageSummary, UsageType } from '../models/water-entry.model';
 export class UsageListComponent {
   @Input() summaries: UsageSummary[] = [];
   @Input() usageType: UsageType = 'weekly';
+
+  constructor() {
+    addIcons({ 
+      'calendar-outline': calendarOutline, 
+      'today-outline': todayOutline, 
+      'water-outline': waterOutline, 
+      'analytics-outline': analyticsOutline 
+    });
+  }
 
   trackByFn(index: number, item: UsageSummary): string {
     return item.label;

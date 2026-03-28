@@ -17,6 +17,9 @@ export interface WaterEntry {
   /** Date of purchase (ISO string) */
   date: string;
 
+  /** Total liters (cans × 20) */
+  totalLiters: number;
+
   /** Optional note about the purchase */
   note?: string;
 }

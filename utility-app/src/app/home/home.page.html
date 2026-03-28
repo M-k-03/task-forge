@@ -20,12 +20,13 @@
       class="feature-card"
       button
     >
+      <div *ngIf="item.backgroundImage" class="card-bg-img" [style.backgroundImage]="'url(' + item.backgroundImage + ')'"></div>
+      <div class="card-overlay"></div>
+      
       <ion-card-content>
-        <div
-          class="card-icon-wrapper"
-          [style.background]="'linear-gradient(135deg, ' + item.color + ', ' + item.color + '99)'"
-        >
-          <ion-icon [name]="item.icon"></ion-icon>
+        <div class="card-icon-wrapper">
+          <img *ngIf="item.iconImage" [src]="item.iconImage" class="card-icon-img" alt="Icon"/>
+          <ion-icon *ngIf="!item.iconImage" [name]="item.icon"></ion-icon>
         </div>
         <h2 class="card-title">{{ item.title }}</h2>
         <p class="card-description">{{ item.description }}</p>

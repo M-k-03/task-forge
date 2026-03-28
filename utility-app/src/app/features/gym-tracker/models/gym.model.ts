@@ -4,28 +4,19 @@ export interface Exercise {
   sets: number;
   reps: string;
   icon: string;
-  targetWeight?: number;
-  completedSets?: boolean[]; // Track session completion within the UI state
+  completedSets?: boolean[]; // track completion of each set
 }
 
-export interface DayPlan {
+export interface WorkoutDay {
   day: string;
   focus: string;
   exercises: Exercise[];
 }
 
-export interface WorkoutPlan {
-  workout_plan: DayPlan[];
-}
-
-/**
- * Interface for saving progress in localStorage
- * Key: date (YYYY-MM-DD)
- */
-export interface GymSession {
+export interface GymEntry {
+  id: string;
   date: string;
-  day: string;
-  exerciseProgress: {
-    [exerciseId: string]: boolean[]; // Array of booleans representing completed sets
-  };
+  workoutDay: string;
+  completedExercises: string[]; // IDs of exercises fully completed
+  notes?: string;
 }

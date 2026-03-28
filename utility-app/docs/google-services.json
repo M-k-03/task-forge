@@ -1,0 +1,29 @@
+{
+    "project_info": {
+        "project_number": "325709141627",
+        "project_id": "task-forge-d4925",
+        "storage_bucket": "task-forge-d4925.firebasestorage.app"
+    },
+    "client": [
+        {
+            "client_info": {
+                "mobilesdk_app_id": "1:325709141627:android:bd406545a7d0c1ec00f4de",
+                "android_client_info": {
+                    "package_name": "com.mk.taskforge"
+                }
+            },
+            "oauth_client": [],
+            "api_key": [
+                {
+                    "current_key": "AIzaSyC4yvy3aTT6xusYnkHKtQmi4BO0QYtZtYE"
+                }
+            ],
+            "services": {
+                "appinvite_service": {
+                    "other_platform_oauth_client": []
+                }
+            }
+        }
+    ],
+    "configuration_version": "1"
+}

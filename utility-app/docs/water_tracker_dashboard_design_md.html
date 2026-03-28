@@ -1,0 +1,50 @@
+# Task Forge - Water Tracker Dashboard Design Documentation
+
+## 1. Screen Overview
+The **Water Tracker Dashboard** is a core utility screen within the Task Forge ecosystem, designed to provide high-level "Hydration Insights." It emphasizes both physiological data (liters consumed) and economic impact (total expenses), aligning with the brand's "Kinetic Editorial" aesthetic.
+
+---
+
+## 2. Visual Layout & Structure
+- **Framework:** Structured using Ionic Framework components (`ion-header`, `ion-content`, `ion-card`) for cross-platform consistency.
+- **Hierarchy:** 
+    1. **Dynamic Header:** High-level summary text ("Hydration Insights").
+    2. **Insight Cards:** Large, focused cards for "Total Expenses" and "Weekly/Monthly Consumption."
+    3. **Actionable History:** A chronological list of recent purchases with "View All" navigation.
+    4. **Proactive Alerts:** A "Stock Alert" section to drive user action.
+    5. **Educational/Motivational Insert:** A high-quality image card with a "Daily Tip."
+
+---
+
+## 3. Key UI Components & Styling
+
+### A. Total Expenses Card
+- **Background:** Clean white (`bg-white`).
+- **Typography:** Large, bold price display using **Lexend** for the primary data point.
+- **Micro-Metric:** A percentage indicator (e.g., "-12% from last month") in **Forge Orange** or green depending on the trend.
+
+### B. Weekly Consumption Card (The "Hero" Card)
+- **Color:** Deep Velocity Blue (`#0061A4`).
+- **Visuals:** Features a subtle, tonal water drop background graphic to reinforce the category.
+- **Typography:** Large white text for the primary liter count.
+
+### C. Purchase History List
+- **Style:** Clean, minimalist list items with custom category icons (e.g., truck icons for deliveries).
+- **Colors:** Uses soft, shaded backgrounds (light blue, light orange, light green) to differentiate items without overwhelming the user.
+
+---
+
+## 4. Design Tokens (Kinetic Flow)
+- **Typography:** Lexend (Headlines & Data), Manrope (Body & Labels).
+- **Colors:** 
+    - **Primary:** Deep Velocity Blue (#0061A4).
+    - **Accent:** Forge Orange (#C04000) for CTA buttons and alerts.
+    - **Backgrounds:** Velocity Slates (#F8FAFB).
+- **Shape:** 32px rounded corners on main cards for a modern, friendly feel.
+
+---
+
+## 5. User Interaction Flow
+- **Top Navigation:** Menu icon for the side drawer and user profile avatar for account access.
+- **Quick Action:** A prominent Floating Action Button (FAB) in Forge Orange for "Quick Log" or adding a new purchase.
+- **Bottom Navigation:** Fixed `BottomNavBar` for jumping between Water, Gym, and Profile sections.

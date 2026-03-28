@@ -1,137 +1,197 @@
+/* Water Tracker Page Styles (High Fidelity - Native Ionic) */
+
 :host {
-  --card-radius: 16px;
-  --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --blue-primary: #0061A4;
+  --blue-grad-start: #0061A4;
+  --blue-grad-end: #00497D;
+  --orange-accent: #C04000;
+  --background-alt: #F8FAFB;
 }
 
-/* ─── Stats Grid ─── */
-.stats-grid {
+ion-content {
+  --background: var(--background-alt);
+}
+
+/* Header Insights */
+.header-insight {
+  padding: 16px 8px 8px 8px;
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--blue-primary);
+    margin: 0 0 4px 0;
+    letter-spacing: -0.5px;
+  }
+  p {
+    font-size: 0.95rem;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Hero Card */
+.hero-card {
+  margin: 0;
+  border-radius: 28px;
+  background: linear-gradient(135deg, var(--blue-grad-start) 0%, var(--blue-grad-end) 100%);
+  color: white;
+  box-shadow: 0 12px 32px rgba(0, 97, 164, 0.22);
+  
+  .hero-meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    opacity: 0.85;
+    
+    .hero-icon { font-size: 1.2rem; }
+    .hero-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  }
+
+  .hero-main {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    
+    .value { font-size: 2.5rem; font-weight: 800; }
+    .unit { font-size: 1.1rem; font-weight: 500; opacity: 0.8; }
+  }
+
+  .progress-container {
+    position: relative;
+    z-index: 1;
+    .progress-bg { height: 6px; background: rgba(255,255,255,0.15); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(255,255,255,0.4); }
+  }
+
+  .hero-bg-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 180%;
+    width: 110%;
+    object-fit: cover;
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(2px);
+  }
+}
+
+/* Mini Cards */
+.stats-mini-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 20px;
 }
 
-.stat-card {
+.mini-card {
   margin: 0;
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
-  border: none;
-  text-align: center;
-
-  ion-card-content {
-    padding: 16px 12px;
-  }
+  border-radius: 24px;
+  background: white;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.02);
+  
+  .mini-label { font-size: 0.75rem; font-weight: 700; color: var(--ion-color-medium); text-transform: uppercase; margin-bottom: 4px; }
+  .mini-val { font-size: 1.4rem; font-weight: 800; color: var(--ion-text-color); }
 }
 
-.stat-icon-wrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 10px;
+.mini-blue .mini-val { color: var(--blue-primary); }
+.mini-green .mini-val { color: var(--ion-color-success); }
 
-  ion-icon {
-    font-size: 1.4rem;
-    color: #fff;
-  }
-
-  &.blue {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-  }
-
-  &.green {
-    background: linear-gradient(135deg, #11998e, #38ef7d);
-  }
-}
-
-.stat-value {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--ion-color-dark);
-}
-
-.stat-label {
-  font-size: 0.75rem;
-  color: var(--ion-color-medium);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 4px;
-}
-
-/* ─── Usage Section (Toggle + List) ─── */
+/* Usage Section */
 .usage-section {
-  margin-bottom: 20px;
-}
-
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ion-color-dark);
-  padding: 0 4px;
-  margin-bottom: 12px;
-
-  ion-icon {
-    font-size: 1.2rem;
-    color: var(--ion-color-primary);
+  margin-top: 32px;
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    padding-left: 8px;
+    ion-icon { font-size: 1.5rem; color: var(--blue-primary); }
   }
 }
 
-/* ─── Add Card ─── */
+/* Form Styles */
 .add-card {
-  margin: 0 0 20px 0;
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
-  border: none;
-}
+  margin: 32px 0 0 0;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.01);
+  
+  .form-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    ion-icon { color: var(--blue-primary); }
+  }
 
-.form-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
-  font-weight: 600;
+  .toggle-header {
+    cursor: pointer;
+    &:active {
+      background: rgba(var(--ion-color-primary-rgb), 0.05);
+    }
+  }
 
-  ion-icon {
-    font-size: 1.3rem;
-    color: var(--ion-color-primary);
+  &.minimized {
+    margin-bottom: 24px;
+    .form-title { opacity: 0.8; }
   }
 }
 
 .input-item {
-  --background: var(--ion-color-light);
-  --border-radius: 12px;
-  margin-bottom: 10px;
-  border-radius: 12px;
+  --background: #f1f3f5;
+  --border-radius: 14px;
+  margin-bottom: 12px;
+  border-radius: 14px;
   overflow: hidden;
-
-  ion-label {
-    font-weight: 500;
-    font-size: 0.85rem;
-    margin-bottom: 4px;
-  }
-}
-
-.custom-input {
-  --padding-start: 12px;
-  --padding-end: 12px;
-  font-size: 1rem;
+  
+  ion-label { font-weight: 700; font-size: 0.8rem; color: var(--ion-color-medium); text-transform: uppercase; margin-bottom: 4px; }
+  .custom-input { font-weight: 600; }
 }
 
 .add-button {
-  margin-top: 16px;
-  --border-radius: 12px;
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  font-weight: 600;
-  font-size: 0.95rem;
-  height: 48px;
+  margin-top: 20px;
+  --border-radius: 16px;
+  --background: var(--blue-primary);
+  height: 54px;
+  font-weight: 700;
+  
+  .button-cost { font-weight: 500; opacity: 0.85; }
 }
 
-.button-cost {
-  opacity: 0.85;
-  font-weight: 400;
+.form-body {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.history-container {
+  margin-top: 24px;
+}
+
+.android-spacer {
+  height: 120px; /* Provides room for Android Nav bar */
+  width: 100%;
 }

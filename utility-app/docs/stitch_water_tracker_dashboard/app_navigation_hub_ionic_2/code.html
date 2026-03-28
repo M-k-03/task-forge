@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kinetic Journal - Navigation Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#ffffff",
+                        "on-background": "#191c1d",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "tertiary-container": "#1c6d24",
+                        "primary": "#00497d",
+                        "on-primary-fixed": "#001d36",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#ab3600",
+                        "on-surface-variant": "#414750",
+                        "tertiary-fixed-dim": "#88d982",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#390c00",
+                        "on-surface": "#191c1d",
+                        "inverse-surface": "#2e3132",
+                        "inverse-primary": "#9fcaff",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8fafb",
+                        "primary-fixed": "#d1e4ff",
+                        "outline": "#717782",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "surface-dim": "#d8dadb",
+                        "tertiary-fixed": "#a3f69c",
+                        "on-secondary-fixed-variant": "#822700",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e6e8e9",
+                        "outline-variant": "#c1c7d2",
+                        "inverse-on-surface": "#eff1f2",
+                        "surface-tint": "#0061a4",
+                        "on-secondary-container": "#611b00",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#002204",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-tertiary-container": "#99ec93",
+                        "on-primary-container": "#c0dbff",
+                        "surface-container": "#eceeef",
+                        "secondary-fixed": "#ffdbcf",
+                        "tertiary": "#005312",
+                        "primary-fixed-dim": "#9fcaff",
+                        "secondary-container": "#ff6f39",
+                        "background": "#f8fafb",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#00497d",
+                        "surface-container-low": "#f2f4f5",
+                        "surface-bright": "#f8fafb",
+                        "primary-container": "#0061a4"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        h1, h2, h3, .font-lexend {
+            font-family: 'Lexend', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Top Navigation Anchor (As per Shared Components JSON) -->
+<header class="fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 w-full bg-surface-container-low dark:bg-slate-800">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-all">menu</span>
+<h1 class="text-2xl font-bold text-blue-800 dark:text-blue-300 tracking-tight font-lexend">Task Forge</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32 min-h-screen px-6 max-w-2xl mx-auto">
+<!-- Profile Header Section (Kinetic Editorial Style) -->
+<section class="mb-10">
+<div class="flex items-end justify-between mb-6">
+<div class="relative">
+<div class="w-24 h-24 rounded-3xl overflow-hidden bg-surface-container-highest">
+<img alt="Alex Rivers" class="w-full h-full object-cover" data-alt="Close-up professional portrait of a confident man with short hair in athletic wear, warm natural side lighting, minimalist background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb8f3q9VFeaw4DqfAghYJW95RFQzG4Ry8DWctw2LD8avuzv_x0SCOtTUqYTThuQkM82a9QoJJuWXIrPpVZrBaqHeIUvDYN4d8MF2vqh0pJM1OgQC179mivHTs2dhWpJ5uqja_7Pas9E-uwtbLF4huCnm3y49JvLORAkjU_uYti_b0cGPDFBgKoDg_a009wRPc4Nf-2SuxJu2tZO9aC8df7jSNbAB6I58v-3MrJt-1OK55Cm78doReR6jCXQzPqz-V3T6L7xFlcaE0"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary text-[10px] font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-widest font-label">
+                        PRO
+                    </div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="text-label-sm font-bold text-secondary tracking-widest uppercase mb-1">Navigation Hub</span>
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tighter font-lexend">Alex Rivers</h2>
+<p class="text-on-surface-variant font-medium">Daily Goal: 85% Achieved</p>
+</div>
+</div>
+</section>
+<!-- Utility Features Grid (Bento Style) -->
+<section class="grid grid-cols-2 gap-4 mb-8">
+<!-- Active/Primary Item: Water Tracker -->
+<div class="col-span-2 bg-primary-container text-white p-6 rounded-[2rem] flex flex-col justify-between h-44 relative overflow-hidden shadow-2xl shadow-primary/20">
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl mb-2" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+<h3 class="text-2xl font-bold font-lexend">Water Tracker</h3>
+<p class="text-primary-fixed/80 text-sm">2.4L / 3.5L consumed today</p>
+</div>
+<div class="z-10 flex justify-end">
+<button class="bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider active:scale-95 transition-all">Quick Log</button>
+</div>
+<!-- Abstract Kinetic Shape -->
+<div class="absolute -right-8 -bottom-8 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+<!-- Gym Tracker -->
+<div class="bg-surface-container-lowest p-5 rounded-[2rem] border-l-4 border-secondary flex flex-col gap-4 shadow-sm active:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start">
+<div class="p-3 rounded-2xl bg-secondary-fixed text-on-secondary-container group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">north_east</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface font-lexend">Gym Tracker</h4>
+<p class="text-xs text-on-surface-variant">Chest &amp; Triceps today</p>
+</div>
+</div>
+<!-- Diet Tracker -->
+<div class="bg-surface-container-lowest p-5 rounded-[2rem] flex flex-col gap-4 shadow-sm active:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start">
+<div class="p-3 rounded-2xl bg-tertiary-fixed text-on-tertiary-container group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">north_east</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface font-lexend">Diet Tracker</h4>
+<p class="text-xs text-on-surface-variant">1,840 kcal remaining</p>
+</div>
+</div>
+<!-- Sleep Monitor -->
+<div class="col-span-2 bg-surface-container-low p-5 rounded-[2rem] flex items-center justify-between group active:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="p-4 rounded-full bg-on-surface text-surface group-active:scale-90 transition-transform">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface font-lexend">Sleep Monitor</h4>
+<p class="text-xs text-on-surface-variant">Last night: 7h 42m (Deep)</p>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-primary-fixed"></div>
+<div class="w-8 h-8 rounded-full border-2 border-surface bg-secondary-fixed"></div>
+</div>
+</div>
+</section>
+<!-- System Settings Section -->
+<section class="space-y-3">
+<h5 class="px-2 text-xs font-bold text-outline uppercase tracking-[0.2em] font-label">Preferences</h5>
+<div class="bg-surface-container-lowest rounded-[1.5rem] overflow-hidden">
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer border-b border-surface-container">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">settings</span>
+<span class="font-medium">Settings</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-sm">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer border-b border-surface-container">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">notifications</span>
+<span class="font-medium">Notifications</span>
+</div>
+<div class="w-10 h-5 bg-primary rounded-full relative">
+<div class="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container-low transition-colors cursor-pointer text-error">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Log Out</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Editorial Quote -->
+<section class="mt-12 opacity-40 italic text-center px-10">
+<p class="text-sm font-body">"The only way to define your limits is by going beyond them."</p>
+</section>
+</main>
+<!-- Bottom Navigation Bar (As per Shared Components JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-t-3xl shadow-[0_-12px_32px_rgba(25,28,29,0.06)]">
+<!-- Water Tab -->
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined">water_drop</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider mt-1">Water</span>
+</div>
+<!-- Gym Tab -->
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider mt-1">Gym</span>
+</div>
+<!-- Diet Tab -->
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined">restaurant</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider mt-1">Diet</span>
+</div>
+<!-- Sleep Tab -->
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-blue-600 transition-all">
+<span class="material-symbols-outlined">bedtime</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider mt-1">Sleep</span>
+</div>
+<!-- Settings Tab (Active State for Hub) -->
+<div class="flex flex-col items-center justify-center bg-blue-600 dark:bg-blue-500 text-white rounded-2xl p-2 scale-110 -translate-y-1 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-lexend text-[10px] font-medium uppercase tracking-wider mt-1">Settings</span>
+</div>
+</nav>
+</body></html>

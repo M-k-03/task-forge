@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Task Forge - Monday: Chest &amp; Triceps</title>
+<!-- Ionic Framework -->
+<script src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js" type="module"></script>
+<script nomodule="" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00497d",
+              "secondary": "#ab3600",
+              "tertiary": "#005312",
+              "background": "#f8fafb",
+              "surface": "#f8fafb",
+              "on-background": "#191c1d",
+              "outline": "#717782",
+              "outline-variant": "#c1c7d2",
+              "surface-container-low": "#f2f4f5",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-highest": "#e1e3e4",
+              "primary-fixed-dim": "#9fcaff",
+              "primary-fixed": "#d1e4ff",
+              "secondary-fixed": "#ffdbcf",
+              "tertiary-fixed": "#a3f69c",
+              "on-tertiary-fixed": "#002204",
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Manrope"],
+              "label": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      :root {
+        --ion-font-family: 'Manrope', sans-serif;
+        --ion-background-color: #f8fafb;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      ion-content {
+        --background: #f8fafb;
+      }
+      ion-toolbar {
+        --background: rgba(248, 250, 251, 0.6);
+        --backdrop-filter: blur(20px);
+        --border-style: none;
+      }
+      ion-card {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 1rem;
+        background: #ffffff;
+      }
+      ion-item {
+        --background: transparent;
+        --border-style: none;
+        --padding-start: 0;
+        --inner-padding-end: 0;
+      }
+      ion-tab-bar {
+        --background: rgba(255, 255, 255, 0.7);
+        --backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(0,0,0,0.05);
+        height: 80px;
+        padding-bottom: 20px;
+      }
+      .custom-progress-ring {
+        transform: rotate(-90deg);
+      }
+    </style>
+</head>
+<body class="font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<ion-app>
+<!-- TopAppBar -->
+<ion-header class="ion-no-border">
+<ion-toolbar class="px-4">
+<ion-buttons slot="start">
+<ion-button color="dark">
+<span class="material-symbols-outlined">menu</span>
+</ion-button>
+</ion-buttons>
+<ion-title class="font-headline font-bold text-xl text-slate-900 text-center">Task Forge</ion-title>
+<ion-buttons slot="end">
+<ion-avatar class="w-8 h-8">
+<img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC2y8h9_ikaO8sDxfh1iWVmYt-j1r_iN2bY1ySiYzPFpJR4xjE1m6egevB-vZBwAPT3OtPzkXWIeO9RM89AXQMW024bDEOcnIDXmjSKgtyi49d0Gk6ftePNDVXmR5OmeRyceQxrTzgFTzW03jVFygUd8SDhCmzGithAAxEPGha6EYRZr2ZSpRBh0iXwtWKTgFIuruDkQqZD72AgQ_dyo_Z-DeBTEbMo-jj_L5TbQGMR-UQB3UwgRhJ97LjsBcJuSGWGgtHRChqtdA"/>
+</ion-avatar>
+</ion-buttons>
+</ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+<div class="max-w-screen-xl mx-auto space-y-8 pb-24">
+<!-- Editorial Header Section -->
+<section>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="font-label text-sm font-bold uppercase tracking-[0.2em] text-secondary mb-2 block">Performance Session</span>
+<h2 class="font-headline text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-on-background leading-none">
+                                Monday: <br/> <span class="text-secondary">Chest &amp; Triceps</span>
+</h2>
+</div>
+<div class="flex items-center gap-8 bg-surface-container-low p-6 rounded-2xl">
+<div class="text-right">
+<span class="font-label text-[10px] font-bold uppercase tracking-widest text-outline block">Session Progress</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline text-3xl font-bold">50</span>
+<span class="font-headline text-xl text-outline">%</span>
+</div>
+</div>
+<div class="w-16 h-16 relative">
+<svg class="w-full h-full custom-progress-ring">
+<circle class="text-primary-fixed opacity-30" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-secondary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="87.9" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<!-- Exercise Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Main Tracking Column -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Exercise Card: Flat Press -->
+<ion-card class="overflow-hidden border border-outline-variant/20">
+<div class="bg-surface-container-low p-5 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-1 bg-secondary h-6 rounded-full"></div>
+<h3 class="font-headline text-lg font-bold">Flat Press</h3>
+</div>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="grid grid-cols-12 gap-2 text-[9px] font-bold uppercase tracking-widest text-outline px-2">
+<div class="col-span-2">Set</div>
+<div class="col-span-4 text-center">Weight</div>
+<div class="col-span-4 text-center">Reps</div>
+<div class="col-span-2 text-right">Done</div>
+</div>
+<!-- Set Row 1 -->
+<div class="grid grid-cols-12 gap-3 items-center bg-surface-container-low/50 p-3 rounded-xl border-l-4 border-secondary">
+<div class="col-span-2 font-headline font-bold text-lg text-secondary">01</div>
+<div class="col-span-4">
+<ion-input class="bg-surface-container-highest rounded-lg text-center font-bold h-10" type="number" value="100"></ion-input>
+</div>
+<div class="col-span-4">
+<ion-input class="bg-surface-container-highest rounded-lg text-center font-bold h-10" type="number" value="10"></ion-input>
+</div>
+<div class="col-span-2 flex justify-end">
+<ion-button class="ion-no-padding w-10 h-10 rounded-full bg-secondary text-white" fill="clear">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">done</span>
+</ion-button>
+</div>
+</div>
+<!-- Set Row 2 -->
+<div class="grid grid-cols-12 gap-3 items-center bg-surface-container-low/30 p-3 rounded-xl">
+<div class="col-span-2 font-headline font-bold text-lg text-outline">02</div>
+<div class="col-span-4">
+<ion-input class="bg-surface-container-highest rounded-lg text-center font-bold h-10" placeholder="--" type="number"></ion-input>
+</div>
+<div class="col-span-4">
+<ion-input class="bg-surface-container-highest rounded-lg text-center font-bold h-10" placeholder="--" type="number"></ion-input>
+</div>
+<div class="col-span-2 flex justify-end">
+<ion-button class="ion-no-padding w-10 h-10 rounded-full border border-outline-variant text-outline" fill="clear">
+<span class="material-symbols-outlined text-sm">radio_button_unchecked</span>
+</ion-button>
+</div>
+</div>
+</div>
+</ion-card>
+<!-- Exercise Card: Inc Press -->
+<ion-card class="border border-outline-variant/10">
+<div class="bg-surface-container-low p-5 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-1 bg-secondary h-6 rounded-full opacity-30"></div>
+<h3 class="font-headline text-lg font-bold">Inc Press</h3>
+</div>
+<span class="font-label text-[10px] font-bold text-outline">0/3 SETS</span>
+</div>
+<div class="p-6 text-center italic text-sm text-outline">
+                                Next up: Focus on controlled eccentric
+                            </div>
+</ion-card>
+<!-- Circuit List -->
+<div class="bg-surface-container-low p-6 rounded-2xl">
+<h4 class="font-headline font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+                                Tricep Accessory Circuit
+                            </h4>
+<ion-list class="bg-transparent space-y-2">
+<ion-item class="rounded-xl bg-white shadow-sm overflow-hidden" lines="none">
+<ion-label class="font-bold px-4">Push Down</ion-label>
+<ion-badge class="bg-tertiary-fixed text-on-tertiary-fixed font-bold rounded-full px-3 py-1 mr-4" slot="end">4 Sets × 12</ion-badge>
+</ion-item>
+<ion-item class="rounded-xl bg-white shadow-sm overflow-hidden" lines="none">
+<ion-label class="font-bold px-4">Kick Back</ion-label>
+<ion-badge class="bg-surface-container-highest text-outline font-bold rounded-full px-3 py-1 mr-4" slot="end">3 Sets × 15</ion-badge>
+</ion-item>
+<ion-item class="rounded-xl bg-white shadow-sm overflow-hidden" lines="none">
+<ion-label class="font-bold px-4">Overhead Ext</ion-label>
+<ion-badge class="bg-surface-container-highest text-outline font-bold rounded-full px-3 py-1 mr-4" slot="end">3 Sets × 12</ion-badge>
+</ion-item>
+</ion-list>
+</div>
+</div>
+<!-- Sidebar / Insights Column -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Visual Inspiration -->
+<div class="relative h-64 rounded-3xl overflow-hidden shadow-xl group">
+<img alt="Gym Motivation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKo5pDEfJKlrJyeIORDNm8vdbwkd-DFdFWqpyraFTaFc5ye5jVF_8JC2pWuFM7d_fGtALVK_7lQY3eaU4sigkm-rftJMRU5JCmRTCjJiy0AupcB0DLzSuK7ARPMZClsvQ_Q3PmKJFzaWL578ceK48rteJGGg6636uDGnm0aE5xyRIpsm17DcP814yOVRfuauZbeskKIkgBGL9_2Pqr-WZeaFT47qps_wiIafOW4KsRsbjlqytjLic0mCaQ4XHhnjgsLq2ljxBJMgU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+<span class="text-white/70 text-[10px] font-bold tracking-widest uppercase mb-1">Weekly PR Goal</span>
+<p class="text-white font-headline text-lg font-bold leading-tight">Crush 105kg Flat Press for 8 reps.</p>
+</div>
+</div>
+<!-- Historical Insight -->
+<ion-card class="ion-padding border border-outline-variant/10">
+<h4 class="font-label text-[10px] font-bold uppercase tracking-widest text-outline mb-4">Historical Insight</h4>
+<ion-list class="bg-transparent">
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-3 mb-3">
+<span class="text-sm font-medium">Last Monday Volume</span>
+<span class="font-headline font-bold text-primary text-lg">4,200kg</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-3 mb-3">
+<span class="text-sm font-medium">Peak Heart Rate</span>
+<span class="font-headline font-bold text-secondary text-lg">164 bpm</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium">Efficiency Score</span>
+<span class="font-headline font-bold text-tertiary text-lg">92%</span>
+</div>
+</ion-list>
+</ion-card>
+<!-- Actions -->
+<div class="space-y-3">
+<ion-button class="h-14 font-headline font-bold" expand="block" style="--background: #ab3600; --border-radius: 1rem; --box-shadow: 0 8px 24px rgba(171, 54, 0, 0.2)">
+<span class="material-symbols-outlined mr-2">timer</span>
+                                End Session
+                            </ion-button>
+<ion-button class="h-14 font-headline font-bold text-on-surface bg-surface-container-highest rounded-2xl" expand="block" fill="clear">
+<span class="material-symbols-outlined mr-2">history</span>
+                                View History
+                            </ion-button>
+</div>
+</div>
+</div>
+</div>
+</ion-content>
+<!-- Ionic Bottom Tab Bar -->
+<ion-tab-bar class="md:hidden" slot="bottom">
+<ion-tab-button class="text-slate-400">
+<span class="material-symbols-outlined">water_drop</span>
+<ion-label class="text-[10px] font-bold uppercase tracking-widest mt-1">Water</ion-label>
+</ion-tab-button>
+<ion-tab-button class="text-primary bg-primary-fixed/30 rounded-2xl mx-2 my-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<ion-label class="text-[10px] font-bold uppercase tracking-widest mt-1">Gym</ion-label>
+</ion-tab-button>
+<ion-tab-button class="text-slate-400">
+<span class="material-symbols-outlined">person</span>
+<ion-label class="text-[10px] font-bold uppercase tracking-widest mt-1">Profile</ion-label>
+</ion-tab-button>
+</ion-tab-bar>
+<!-- Desktop Floating Status -->
+<div class="hidden lg:flex fixed bottom-10 left-1/2 -translate-x-1/2 bg-on-background/90 backdrop-blur-md text-white px-8 py-4 rounded-full items-center gap-6 shadow-2xl z-50 border border-white/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">pace</span>
+<span class="text-sm font-bold tracking-tight">Session Time: 42:12</span>
+</div>
+<div class="w-px h-6 bg-white/20"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="text-sm font-bold tracking-tight">Exercises: 1/6</span>
+</div>
+<button class="bg-secondary px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">
+                Finish Now
+            </button>
+</div>
+</ion-app>
+</body></html>

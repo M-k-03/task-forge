@@ -53,14 +53,48 @@ npm install
 
 > If you see peer dependency conflicts, use `npm install --legacy-peer-deps`.
 
-### 5. Run the app
+### 6. Run the app (Web)
 ```powershell
 ionic serve
 ```
 
 The app will open at `http://localhost:8100`.
 
+## Android Setup
+
+### 7. Prerequisites
+1.  **Android Studio**: Download and install [Android Studio](https://developer.android.com/studio).
+2.  **SDK Tools**: Ensure **Android SDK**, **Android SDK Command-line Tools**, and an **Android Virtual Device (AVD)** are installed.
+
+### 8. Add Android Platform
+Run these commands in the `utility-app` directory:
+
+```powershell
+# Install the capacitor android library
+npm install @capacitor/android
+
+# Build the web assets (required)
+npm run build
+
+# Add the android folder
+npx cap add android
+```
+
+### 9. Open and Run in Android Studio
+To launch Android Studio with your project:
+```powershell
+npx cap open android
+```
+
+### 10. Syncing Changes
+When you update your web code, sync it to the android project:
+```powershell
+npm run build
+npx cap sync android
+```
+
 ## Troubleshooting
+
 
 | Issue | Fix |
 |---|---|
