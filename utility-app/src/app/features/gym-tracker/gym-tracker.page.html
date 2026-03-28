@@ -11,8 +11,21 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-toolbar class="day-selector-toolbar">
-    <ion-segment [value]="selectedDay()" (ionChange)="onDayChange($event)" scrollable="true">
+  <ion-toolbar class="tab-toolbar">
+    <ion-segment [value]="currentTab()" (ionChange)="currentTab.set($any($event.detail.value))" mode="md">
+      <ion-segment-button value="workout">
+        <ion-label>Today</ion-label>
+        <ion-icon name="fitness-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="history">
+        <ion-label>History</ion-label>
+        <ion-icon name="time-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-toolbar class="day-selector-toolbar" *ngIf="currentTab() === 'workout'">
+    <ion-segment [value]="selectedDay()" (ionChange)="onDayChange($event)" scrollable="true" mode="md">
       <ion-segment-button value="Monday">Mon</ion-segment-button>
       <ion-segment-button value="Tuesday">Tue</ion-segment-button>
       <ion-segment-button value="Wednesday">Wed</ion-segment-button>
@@ -24,87 +37,122 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Gym Tracker</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div class="progress-section" *ngIf="currentWorkout()?.exercises?.length">
-    <div class="progress-header">
-      <span class="focus-text">{{ currentWorkout()?.focus }}</span>
-      <ion-badge color="primary">{{ (progress() * 100) | number:'1.0-0' }}%</ion-badge>
+<ion-content [fullscreen]="true" class="gym-content">
+  <!-- WORKOUT VIEW -->
+  <div *ngIf="currentTab() === 'workout'">
+    <div class="progress-section" *ngIf="currentWorkout()?.exercises?.length">
+      <div class="progress-header">
+        <span class="focus-text">{{ currentWorkout()?.focus }}</span>
+        <ion-badge color="primary">{{ (progress() * 100) | number:'1.0-0' }}%</ion-badge>
+      </div>
+      <ion-progress-bar [value]="progress()" color="primary" class="main-progress"></ion-progress-bar>
     </div>
-    <ion-progress-bar [value]="progress()" color="primary" class="main-progress"></ion-progress-bar>
-  </div>
 
-  <div class="empty-state" *ngIf="!currentWorkout()?.exercises?.length">
-    <ion-icon name="calendar-outline"></ion-icon>
-    <h3>No exercises found 😴</h3>
-    <p>Enjoy your recovery or add exercises below.</p>
-    <ion-button fill="clear" (click)="openAddModal()">
-      <ion-icon name="add-outline" slot="start"></ion-icon>
-      Create Workout
-    </ion-button>
-  </div>
+    <div class="empty-state" *ngIf="!currentWorkout()?.exercises?.length">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <h3>No exercises found 😴</h3>
+      <p>Enjoy your recovery or add exercises below.</p>
+      <ion-button fill="clear" (click)="openAddModal()">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        Create Workout
+      </ion-button>
+    </div>
 
-  <ion-grid *ngIf="currentWorkout()?.exercises?.length">
-    <ion-row>
-      <ion-col size="12" *ngFor="let exercise of currentWorkout()?.exercises">
-        <ion-card class="exercise-card">
-          <ion-card-header>
-            <div class="card-header-flex">
-              <div class="exercise-meta">
-                <ion-icon [name]="exercise.icon" class="exercise-icon"></ion-icon>
-                <div>
-                  <ion-card-title>{{ exercise.name }}</ion-card-title>
-                  <ion-card-subtitle>{{ exercise.reps }} reps</ion-card-subtitle>
+    <ion-grid *ngIf="currentWorkout()?.exercises?.length">
+      <ion-row>
+        <ion-col size="12" *ngFor="let exercise of currentWorkout()?.exercises">
+          <ion-card class="exercise-card" [class.finished]="isFinished(exercise)" [class.in-progress]="isStarted(exercise)">
+            <ion-card-header>
+              <div class="card-header-flex">
+                <div class="exercise-meta">
+                  <ion-icon [name]="exercise.icon" class="exercise-icon"></ion-icon>
+                  <div>
+                    <ion-card-title>{{ exercise.name }}</ion-card-title>
+                    <ion-card-subtitle>{{ exercise.type === 'strength' ? exercise.reps + ' reps' : (exercise.duration || 0) + ' min' }}</ion-card-subtitle>
+                  </div>
+                </div>
+                <div class="header-tools">
+                   <div class="progress-badge" *ngIf="isStarted(exercise)">
+                     <ion-icon [name]="isFinished(exercise) ? 'checkmark-circle' : 'time-outline'" 
+                              [color]="isFinished(exercise) ? 'success' : 'warning'"></ion-icon>
+                   </div>
+                   <ion-badge color="primary">{{ exercise.sets }} Sets</ion-badge>
+                   <ion-button fill="clear" color="danger" (click)="removeExercise(exercise.id)">
+                     <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                   </ion-button>
                 </div>
               </div>
-              <div class="header-tools">
-                <ion-badge color="light">{{ exercise.sets }} Sets</ion-badge>
-                <ion-button fill="clear" color="danger" (click)="removeExercise(exercise.id)">
-                  <ion-icon slot="icon-only" name="trash-outline" size="small"></ion-icon>
-                </ion-button>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="sets-row">
+                <div *ngFor="let completed of exercise.completedSets; let i = index" 
+                     class="set-bubble" [class.completed]="completed" (click)="toggleSet(exercise, i)">
+                  {{ i + 1 }}
+                </div>
               </div>
-            </div>
-          </ion-card-header>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="fab-padding"></div>
+  </div>
+
+  <!-- HISTORY VIEW -->
+  <div *ngIf="currentTab() === 'history'">
+    <div class="history-list ion-padding">
+      <div class="empty-state" *ngIf="!(history$ | async)?.length">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        <h3>No History Yet</h3>
+        <p>Your completed workouts will appear here.</p>
+      </div>
+
+      <ion-accordion-group expand="inset">
+        <ion-accordion *ngFor="let entry of (history$ | async)" [value]="entry.id" class="history-accordion">
+          <ion-item slot="header" color="light">
+            <ion-icon name="calendar-outline" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h2>{{ entry.date | date:'EEE, MMM d' }}</h2>
+              <p>{{ entry.workoutDay }} Focus: {{ entry.focus }}</p>
+            </ion-label>
+            <ion-badge color="success" slot="end" mode="ios">
+              {{ entry.completedExercises.length }} Done
+            </ion-badge>
+          </ion-item>
           
-          <ion-card-content>
-            <div class="sets-row">
-              <div 
-                *ngFor="let completed of exercise.completedSets; let i = index" 
-                class="set-bubble"
-                [class.completed]="completed"
-                (click)="toggleSet(exercise, i)"
-              >
-                {{ i + 1 }}
+          <div class="ion-padding" slot="content">
+            <div class="history-details">
+              <div *ngFor="let ex of entry.completedExercises" class="history-item">
+                <ion-icon [name]="ex.type === 'strength' ? 'barbell-outline' : 'bicycle-outline'" color="primary"></ion-icon>
+                <span class="ex-name">{{ ex.name }}</span>
+                <span class="ex-sets">{{ ex.completedSetsCount }} / {{ ex.sets }} sets</span>
               </div>
             </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            <div class="entry-meta" *ngIf="entry.notes">
+              <p>Notes: {{ entry.notes }}</p>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+      <div class="fab-padding"></div>
+    </div>
+  </div>
 
-  <div class="fab-padding"></div>
-
-  <!-- Multi-FAB or Single FAB for Add/Save -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="gym-fab">
-    <ion-fab-button (click)="openAddModal()" color="primary" class="add-fab">
+  <!-- FIXED ELEMENTS -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="currentTab() === 'workout'" class="gym-fab">
+    <ion-fab-button (click)="openAddModal()" color="primary">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
-    
-    <ion-fab-button (click)="saveWorkout()" color="success" [disabled]="progress() === 0" class="save-fab">
+    <ion-fab-button (click)="saveWorkout()" color="success" [disabled]="progress() === 0">
       <ion-icon name="save-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <!-- Add Exercise Modal -->
+  <!-- Modals remain the same -->
   <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
     <ng-template>
-      <ion-header>
+        <!-- Modal content as before -->
+    <ion-header>
         <ion-toolbar color="primary">
           <ion-title>Add Exercise</ion-title>
           <ion-buttons slot="end">
@@ -116,34 +164,34 @@
       </ion-header>
       <ion-content class="ion-padding">
         <div class="form-container">
+          <div class="type-selector">
+            <ion-label class="field-label">Exercise Type</ion-label>
+            <ion-segment [(ngModel)]="newExercise.type" (ionChange)="onTypeChange()" mode="ios">
+              <ion-segment-button value="strength">
+                <ion-label>Strength</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="cardio">
+                <ion-label>Cardio</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
           <ion-item lines="none" class="input-item">
             <ion-label position="stacked">Name</ion-label>
-            <ion-input [(ngModel)]="newExercise.name" placeholder="e.g. Bench Press"></ion-input>
+            <ion-input [(ngModel)]="newExercise.name" placeholder="Name"></ion-input>
           </ion-item>
-          
           <ion-item lines="none" class="input-item">
             <ion-label position="stacked">Sets</ion-label>
-            <ion-input type="number" [(ngModel)]="newExercise.sets" placeholder="3"></ion-input>
+             <ion-input type="number" [(ngModel)]="newExercise.sets"></ion-input>
           </ion-item>
-          
-          <ion-item lines="none" class="input-item">
+          <ion-item lines="none" class="input-item" *ngIf="newExercise.type === 'strength'">
             <ion-label position="stacked">Reps</ion-label>
-            <ion-input [(ngModel)]="newExercise.reps" placeholder="10-12"></ion-input>
+            <ion-input [(ngModel)]="newExercise.reps" placeholder="e.g. 10-12"></ion-input>
           </ion-item>
-          
-          <ion-item lines="none" class="input-item">
-            <ion-label position="stacked">Icon</ion-label>
-            <ion-select [(ngModel)]="newExercise.icon" placeholder="Select Icon">
-              <ion-select-option value="barbell-outline">Barbell</ion-select-option>
-              <ion-select-option value="fitness-outline">Dumbbell</ion-select-option>
-              <ion-select-option value="body-outline">Bodyweight</ion-select-option>
-              <ion-select-option value="bicycle-outline">Cardio</ion-select-option>
-            </ion-select>
+          <ion-item lines="none" class="input-item" *ngIf="newExercise.type === 'cardio'">
+            <ion-label position="stacked">Duration (min)</ion-label>
+            <ion-input type="number" [(ngModel)]="newExercise.duration"></ion-input>
           </ion-item>
-
-          <ion-button expand="block" (click)="addExerciseToPlan()" class="confirm-button">
-            Add to {{ selectedDay() }}
-          </ion-button>
+          <ion-button expand="block" (click)="addExerciseToPlan()">Add</ion-button>
         </div>
       </ion-content>
     </ng-template>

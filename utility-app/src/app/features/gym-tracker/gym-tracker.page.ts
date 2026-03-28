@@ -30,6 +30,10 @@ import {
   IonInput,
   IonSelect,
   IonSelectOption,
+  IonRadioGroup,
+  IonRadio,
+  IonAccordion,
+  IonAccordionGroup,
   ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -52,10 +56,12 @@ import {
   addOutline,
   closeOutline,
   trashOutline,
-  bicycleOutline
+  bicycleOutline,
+  timeOutline,
+  statsChartOutline
 } from 'ionicons/icons';
 import { GymTrackerService } from './services/gym-tracker.service';
-import { WorkoutDay, Exercise } from './models/gym.model';
+import { WorkoutDay, Exercise, ExerciseSnapshot } from './models/gym.model';
 import { Observable, take } from 'rxjs';
 
 @Component({
@@ -91,7 +97,11 @@ import { Observable, take } from 'rxjs';
     IonLabel,
     IonInput,
     IonSelect,
-    IonSelectOption
+    IonSelectOption,
+    IonRadioGroup,
+    IonRadio,
+    IonAccordion,
+    IonAccordionGroup
   ],
   templateUrl: './gym-tracker.page.html',
   styleUrls: ['./gym-tracker.page.scss'],
@@ -104,14 +114,17 @@ export class GymTrackerPage implements OnInit {
   selectedDay = signal<string>(this.getTodayName());
   currentWorkout = signal<WorkoutDay | undefined>(undefined);
   
+  currentTab = signal<'workout' | 'history'>('workout');
+  history$ = this.service.history$;
   progress = signal<number>(0);
 
-  // Custom Exercise Form
   isModalOpen = false;
   newExercise = {
     name: '',
+    type: 'strength' as 'strength' | 'cardio',
     sets: 3,
     reps: '10',
+    duration: 5,
     icon: 'barbell-outline'
   };
 
@@ -135,7 +148,9 @@ export class GymTrackerPage implements OnInit {
       'add-outline': addOutline,
       'close-outline': closeOutline,
       'trash-outline': trashOutline,
-      'bicycle-outline': bicycleOutline
+      'bicycle-outline': bicycleOutline,
+      'time-outline': timeOutline,
+      'stats-chart-outline': statsChartOutline
     });
   }
 
@@ -162,8 +177,6 @@ export class GymTrackerPage implements OnInit {
     this.workoutPlan$.pipe(take(1)).subscribe(plan => {
       const day = plan.find(d => d.day === dayName);
       if (day) {
-        // Deep copy to avoid mutating the source BehaviorSubject directly if not needed
-        // but here we want local state for completion tracking.
         this.currentWorkout.set(JSON.parse(JSON.stringify(day)));
         this.calculateProgress();
       } else {
@@ -180,18 +193,23 @@ export class GymTrackerPage implements OnInit {
     }
   }
 
+  isStarted(exercise: Exercise): boolean {
+    return exercise.completedSets?.some(s => s) || false;
+  }
+
+  isFinished(exercise: Exercise): boolean {
+    return exercise.completedSets?.every(s => s) || false;
+  }
+
   private calculateProgress() {
     const workout = this.currentWorkout();
     if (!workout) return;
-
     let totalSets = 0;
     let completedSets = 0;
-
     workout.exercises.forEach(ex => {
       totalSets += ex.sets;
       completedSets += (ex.completedSets?.filter(s => s).length || 0);
     });
-
     this.progress.set(totalSets > 0 ? completedSets / totalSets : 0);
   }
 
@@ -199,27 +217,43 @@ export class GymTrackerPage implements OnInit {
     const workout = this.currentWorkout();
     if (!workout) return;
 
-    // 1. Sync the current custom Plan to Cloud (Exercises data)
     await this.service.syncManualPlan();
 
-    // 2. Record the history entry
-    const completedExerciseIds = workout.exercises
-      .filter(ex => ex.completedSets?.every(s => s))
-      .map(ex => ex.id);
+    // Create snapshots of ANY exercise that had at least one set completed
+    const snapshots: ExerciseSnapshot[] = workout.exercises
+      .filter(ex => ex.completedSets?.some(s => s))
+      .map(ex => ({
+        id: ex.id,
+        name: ex.name,
+        type: ex.type || 'strength',
+        sets: ex.sets,
+        completedSetsCount: ex.completedSets?.filter(s => s).length || 0
+      }));
 
-    this.service.recordWorkout(workout.day, completedExerciseIds);
-    
-    this.showToast('Workout & Exercises saved successfully!', 'success');
+    if (snapshots.length === 0) {
+      this.showToast('Complete at least one set to save!', 'warning');
+      return;
+    }
+
+    this.service.recordWorkout(workout.day, workout.focus, snapshots);
+    this.showToast('Workout recorded in history!', 'success');
+    this.currentTab.set('history');
   }
 
   resetWorkout() {
     this.updateCurrentWorkout(this.selectedDay());
   }
 
-  // --- Custom Plan Methods ---
-
   openAddModal() {
     this.isModalOpen = true;
+  }
+
+  onTypeChange() {
+    if (this.newExercise.type === 'strength') {
+      this.newExercise.icon = 'barbell-outline';
+    } else {
+      this.newExercise.icon = 'bicycle-outline';
+    }
   }
 
   async addExerciseToPlan() {
@@ -227,15 +261,23 @@ export class GymTrackerPage implements OnInit {
 
     await this.service.addExercise(this.selectedDay(), {
       name: this.newExercise.name,
+      type: this.newExercise.type,
       sets: Number(this.newExercise.sets),
-      reps: this.newExercise.reps,
+      reps: this.newExercise.type === 'strength' ? this.newExercise.reps : '',
+      duration: this.newExercise.type === 'cardio' ? Number(this.newExercise.duration) : undefined,
       icon: this.newExercise.icon
     });
 
     this.isModalOpen = false;
-    this.newExercise = { name: '', sets: 3, reps: '10', icon: 'barbell-outline' };
+    this.newExercise = { 
+      name: '', 
+      type: 'strength',
+      sets: 3, 
+      reps: '10', 
+      duration: 5,
+      icon: 'barbell-outline' 
+    };
     
-    // Refresh
     this.updateCurrentWorkout(this.selectedDay());
     this.showToast('Exercise added successfully!', 'success');
   }
