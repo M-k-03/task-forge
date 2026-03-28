@@ -9,7 +9,7 @@
 }
 
 .day-selector-toolbar {
-  --background: #f8f9fa;
+  --background: var(--ion-color-light, #f8f9fa);
   --min-height: 48px;
 
   ion-segment {
@@ -19,8 +19,8 @@
 
 .progress-section {
   padding: 16px;
-  background: #ffffff;
-  border-bottom: 1px solid #edf2f7;
+  background: var(--ion-card-background, #ffffff);
+  border-bottom: 1px solid var(--ion-border-color, #edf2f7);
 
   .progress-header {
     display: flex;
@@ -71,11 +71,11 @@
     ion-card-title {
       font-size: 1.1rem;
       font-weight: 700;
-      color: #2d3748;
+      color: var(--ion-text-color, #2d3748);
     }
 
     ion-card-subtitle {
-      color: #718096;
+      color: var(--ion-text-color-step-300, #718096);
       font-weight: 500;
     }
   }
@@ -175,14 +175,14 @@
 }
 
 .input-item {
-  --background: #f7fafc;
+  --background: var(--ion-color-step-50, #f7fafc);
   --border-radius: 12px;
   margin-bottom: 8px;
   
   ion-label {
     font-weight: 700;
     font-size: 0.85rem;
-    color: #4a5568;
+    color: var(--ion-text-color, #4a5568);
     margin-bottom: 6px;
   }
 }
